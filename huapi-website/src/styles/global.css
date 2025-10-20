@@ -1,0 +1,192 @@
+/* 全局传统文化设计风格 */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
+
+:root {
+  /* 传统配色方案 - 粉红色主题 */
+  --color-primary: #E85D9F;      /* 粉红色 - 皮影的主色 */
+  --color-secondary: #D946A6;    /* 深粉红 - 辅助色 */
+  --color-accent: #4CAF50;       /* 绿色 - 强调色 */
+  --color-light: #FFF5F9;        /* 浅粉 - 背景色 */
+  --color-dark: #5a4a3a;         /* 深棕 - 文字色 */
+  --color-border: #F0D9E8;       /* 浅粉 - 边框色 */
+
+  /* 字体 */
+  --font-serif: 'Noto Serif SC', 'SimSun', serif;
+  --font-sans: 'SimHei', 'Microsoft YaHei', sans-serif;
+
+  /* 间距 */
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+
+  /* 圆角 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* 阴影 */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 20px rgba(139, 69, 19, 0.15);
+}
+
+/* 传统纹理背景 */
+body {
+  background: linear-gradient(135deg, #FFF5F9 0%, #F0D9E8 100%);
+  background-attachment: fixed;
+  font-family: var(--font-serif);
+  color: var(--color-dark);
+}
+
+/* 标题样式 - 使用传统字体 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  color: var(--color-primary);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* 段落样式 */
+p {
+  font-family: var(--font-serif);
+  line-height: 1.8;
+  color: var(--color-dark);
+}
+
+/* 链接样式 */
+a {
+  color: var(--color-secondary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+/* 装饰线条 */
+.divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
+  margin: var(--spacing-lg) 0;
+}
+
+/* 传统边框 */
+.traditional-border {
+  border: 2px solid var(--color-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* 传统卡片 */
+.traditional-card {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-lg);
+  transition: all 0.3s ease;
+}
+
+.traditional-card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-secondary);
+  transform: translateY(-4px);
+}
+
+/* 传统按钮 */
+.traditional-button {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: var(--color-light);
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+}
+
+.traditional-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.traditional-button:active {
+  transform: translateY(0);
+}
+
+/* 传统标题装饰 */
+.title-with-decoration {
+  position: relative;
+  display: inline-block;
+  padding: 0 var(--spacing-md);
+}
+
+.title-with-decoration::before,
+.title-with-decoration::after {
+  content: "✦";
+  color: var(--color-accent);
+  margin: 0 var(--spacing-sm);
+  font-size: 0.8em;
+}
+
+/* 传统分隔符 */
+.ornament {
+  display: inline-block;
+  color: var(--color-secondary);
+  margin: 0 var(--spacing-sm);
+  font-size: 1.2em;
+}
+
+/* 传统文本效果 */
+.text-shadow-traditional {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 传统渐变文本 */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  :root {
+    --spacing-xl: 24px;
+    --spacing-2xl: 32px;
+  }
+
+  h1, h2, h3 {
+    letter-spacing: 0.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --spacing-lg: 16px;
+    --spacing-xl: 20px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+}
+
