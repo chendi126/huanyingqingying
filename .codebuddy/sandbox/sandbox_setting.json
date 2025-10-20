@@ -1,0 +1,20 @@
+{
+  "path": "e:\\LI_shang\\hua皮影\\huapi-website\\dist",
+  "desc": "这是一个基于React和Vite的华皮影文化网站项目，包含多媒体展示功能",
+  "id": "cf146e8b8d554ef7b4bbb9deb18c1d98",
+  "data": {
+    "spaceKey": "cf146e8b8d554ef7b4bbb9deb18c1d98",
+    "connections": {
+      "webIDE": "https://cf146e8b8d554ef7b4bbb9deb18c1d98.codebuddy.cloudstudio.club",
+      "preview": "https://cf146e8b8d554ef7b4bbb9deb18c1d98--{port}.codebuddy.cloudstudio.club",
+      "api": "https://cf146e8b8d554ef7b4bbb9deb18c1d98--api.codebuddy.cloudstudio.club",
+      "pty": "https://cf146e8b8d554ef7b4bbb9deb18c1d98--pty.codebuddy.cloudstudio.club"
+    }
+  },
+  "config": {
+    "api": "https://cf146e8b8d554ef7b4bbb9deb18c1d98--api.codebuddy.cloudstudio.club",
+    "pty": "https://cf146e8b8d554ef7b4bbb9deb18c1d98--pty.codebuddy.cloudstudio.club",
+    "region": "ap-shanghai",
+    "spaceKey": "cf146e8b8d554ef7b4bbb9deb18c1d98"
+  }
+}
