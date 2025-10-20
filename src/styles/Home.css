@@ -9,18 +9,11 @@
 
 /* 页头 - 传统风格 */
 .header {
-  background: url('../../media/jieyuan.jpg') center/cover no-repeat;
-  background-attachment: fixed;
-  color: #ffffff;
-  padding: 30px 20px;
+  background: url('/jieyuan.jpg') center/cover no-repeat;
+  padding: 60px 20px;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
-  min-height: 250px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .header::before {
