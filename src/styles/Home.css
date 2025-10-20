@@ -1,0 +1,302 @@
+/* 首页样式 */
+
+.home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #FFF5F9 0%, #F0D9E8 100%);
+}
+
+/* 页头 - 传统风格 */
+.header {
+  background: url('../../media/jieyuan.jpg') center/cover no-repeat;
+  background-attachment: fixed;
+  color: #ffffff;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
+  letter-spacing: 2px;
+  color: #ffffff;
+}
+
+.title::before,
+.title::after {
+  content: "✦";
+  display: block;
+  font-size: 0.6em;
+  margin: 10px 0;
+  opacity: 0.8;
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  margin: 0;
+  opacity: 0.95;
+  font-family: 'SimSun', 'Microsoft YaHei', serif;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+/* 主内容 */
+.main-content {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 40px 20px;
+}
+
+/* 介绍部分 */
+.intro-section {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.intro-section h2 {
+  font-size: 2rem;
+  color: #E85D9F;
+  margin-bottom: 20px;
+  font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
+}
+
+.intro-section p {
+  font-size: 1.1rem;
+  color: #5a4a3a;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'SimSun', 'Microsoft YaHei', serif;
+}
+
+/* 人物部分 */
+.characters-section h2 {
+  font-size: 2rem;
+  color: #E85D9F;
+  margin-bottom: 40px;
+  text-align: center;
+  font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
+}
+
+.characters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.character-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.character-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.character-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #E85D9F, #D946A6, #E85D9F);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.character-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(232, 93, 159, 0.2);
+  border-color: #D946A6;
+}
+
+.character-card:hover::before {
+  opacity: 1;
+}
+
+.card-image-wrapper {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.character-card:hover .card-image {
+  transform: scale(1.05);
+}
+
+.card-content {
+  padding: 20px;
+  background: white;
+}
+
+.card-name {
+  font-size: 1.3rem;
+  color: #E85D9F;
+  margin: 0 0 8px 0;
+  font-family: 'SimHei', 'Microsoft YaHei', sans-serif;
+  font-weight: 600;
+}
+
+.card-title {
+  font-size: 0.95rem;
+  color: #D946A6;
+  margin: 0;
+  font-family: 'SimSun', 'Microsoft YaHei', serif;
+}
+
+/* 页脚 */
+.footer {
+  background: #E85D9F;
+  color: #ffffff;
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: auto;
+  font-family: 'SimSun', 'Microsoft YaHei', serif;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* 响应式设计 - 平板 */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .header {
+    padding: 40px 20px;
+  }
+
+  .main-content {
+    padding: 30px 15px;
+  }
+
+  .intro-section h2,
+  .characters-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .characters-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+}
+
+/* 响应式设计 - 手机 */
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .header {
+    padding: 30px 15px;
+  }
+
+  .main-content {
+    padding: 20px 10px;
+  }
+
+  .intro-section {
+    margin-bottom: 40px;
+  }
+
+  .intro-section h2,
+  .characters-section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+
+  .intro-section p {
+    font-size: 1rem;
+  }
+
+  .characters-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .card-image-wrapper {
+    height: 200px;
+  }
+
+  .card-content {
+    padding: 15px;
+  }
+
+  .card-name {
+    font-size: 1.1rem;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+  }
+
+  .footer {
+    padding: 20px 15px;
+  }
+
+  .footer p {
+    font-size: 0.85rem;
+  }
+}
+
