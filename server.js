@@ -8,8 +8,16 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 提供 public 目录中的静态文件（优先级最高）
-app.use(express.static(join(__dirname, 'public')));
+// 配置 MIME 类型
+app.use(express.static(join(__dirname, 'public'), {
+  setHeaders: (res, path) => {
+    if (path.endsWith('.mp4')) {
+      res.setHeader('Content-Type', 'video/mp4');
+      res.setHeader('Content-Disposition', 'inline');
+      res.setHeader('Accept-Ranges', 'bytes');
+    }
+  }
+}));
 
 // 提供 dist 目录中的静态文件
 app.use(express.static(join(__dirname, 'dist')));
