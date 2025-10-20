@@ -3,11 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build:server": "cross-env VITE_BASE_URL=/ vite build",
-    "build:github": "cross-env VITE_BASE_URL=/huaxianpiying/ vite build",
+    "build:github": "cross-env VITE_BASE_URL=/huanyingqingying/ vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest"

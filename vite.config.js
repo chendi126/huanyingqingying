@@ -5,6 +5,15 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: process.env.VITE_BASE_URL || '/',
   plugins: [react()],
+  css: {
+    postcss: {
+      plugins: []
+    }
+  },
+  build: {
+    target: 'es2020',
+    cssTarget: 'es2020'
+  },
   test: {
     globals: true,
     environment: 'jsdom',

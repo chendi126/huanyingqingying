@@ -9,7 +9,7 @@
 
 /* 页头 - 传统风格 */
 .header {
-  background: url('/jieyuan.jpg') center/cover no-repeat;
+  background: url('/jieyuan.jpg') center center/cover no-repeat;
   padding: 60px 20px;
   text-align: center;
   position: relative;
