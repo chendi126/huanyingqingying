@@ -2,7 +2,8 @@ export default {
   apps: [
     {
       name: 'huaxianpiying',
-      script: './server.js',
+      script: 'node',
+      args: 'server.js',
       instances: 'max',
       exec_mode: 'cluster',
       env: {
