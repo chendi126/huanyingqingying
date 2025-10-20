@@ -8,11 +8,14 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 提供静态文件
+// 提供 public 目录中的静态文件（优先级最高）
+app.use(express.static(join(__dirname, 'public')));
+
+// 提供 dist 目录中的静态文件
 app.use(express.static(join(__dirname, 'dist')));
 
 // 处理 SPA 路由 - 所有请求都返回 index.html
-app.use((req, res) => {
+app.use((_req, res) => {
   res.sendFile(join(__dirname, 'dist', 'index.html'));
 });
 
