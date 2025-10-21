@@ -72,20 +72,17 @@ export default function CharacterDetail() {
             <div className="video-wrapper">
               {character.videoUrl.startsWith('http') ? (
                 <iframe
-                  width="100%"
-                  height="400"
                   src={character.videoUrl}
                   title={`${character.name}的视频`}
-                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
+                  className="video-iframe"
+                  style={{ border: 'none' }}
                 ></iframe>
               ) : (
                 <video
-                  width="100%"
-                  height="400"
                   controls
-                  style={{ backgroundColor: '#000' }}
+                  className="video-player"
                 >
                   <source src={character.videoUrl} type="video/mp4" />
                   您的浏览器不支持视频播放

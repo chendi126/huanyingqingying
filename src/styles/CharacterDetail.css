@@ -237,20 +237,32 @@
 .video-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%;
-  height: 0;
   overflow: hidden;
   border-radius: 8px;
-  background: #f0f0f0;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 优先展示全视频，使用 object-fit: contain */
 }
 
-.video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
+/* 外部 iframe 视频（如 YouTube） */
+.video-wrapper .video-iframe {
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
   border-radius: 8px;
+  display: block;
+}
+
+/* 本地视频播放器 */
+.video-wrapper .video-player {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: 8px;
+  object-fit: contain;
+  display: block;
 }
 
 /* 页脚 */
@@ -319,6 +331,15 @@
   .description-text {
     font-size: 1rem;
   }
+
+  /* 平板视频容器 */
+  .video-wrapper .video-iframe {
+    aspect-ratio: 16 / 9;
+  }
+
+  .video-wrapper .video-player {
+    max-height: 400px;
+  }
 }
 
 /* 响应式设计 - 手机 */
@@ -360,6 +381,7 @@
   .achievements-section,
   .video-section {
     margin-bottom: 30px;
+    padding: 20px;
   }
 
   .description-section h2,
@@ -381,6 +403,24 @@
   .achievements-list li {
     padding: 10px 0 10px 25px;
     font-size: 0.95rem;
+  }
+
+  /* 手机视频容器 - 优先展示全视频 */
+  .video-wrapper {
+    min-height: 200px;
+    padding: 0;
+  }
+
+  .video-wrapper .video-iframe {
+    aspect-ratio: 16 / 9;
+    min-height: 200px;
+  }
+
+  .video-wrapper .video-player {
+    width: 100%;
+    height: auto;
+    min-height: 200px;
+    max-height: 100vh;
   }
 
   .detail-footer {
