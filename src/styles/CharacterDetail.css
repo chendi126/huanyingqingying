@@ -405,7 +405,7 @@
   content: "✦";
   position: absolute;
   left: 0;
-  color: #E85D9F;
+  color: var(--color-primary);
   font-size: 1.2rem;
 }
 
@@ -723,18 +723,18 @@
   }
 
   .description-text {
-    font-size: 1.4rem !important; /* 1.17 * 1.2 = 1.4，手机端放大一号，使用!important确保生效 */
+    font-size: 1.2rem !important; /* 1 * 1.2 = 1.2，手机端缩小一号，使用!important确保生效 */
     line-height: 1.8 !important;
   }
 
   .description-text p {
     margin-bottom: 15px;
-    font-size: 1.4rem !important; /* 确保段落字体大小生效 */
+    font-size: 1.2rem !important; /* 确保段落字体大小生效 */
   }
 
   .achievements-list li {
     padding: 10px 0 10px 25px;
-    font-size: 1.4rem !important; /* 1.17 * 1.2 = 1.4，与人物介绍正文一致，使用!important确保生效 */
+    font-size: 1.2rem !important; /* 1 * 1.2 = 1.2，与人物介绍正文一致，使用!important确保生效 */
   }
 
   /* 手机视频容器 - 优先展示全视频 */
