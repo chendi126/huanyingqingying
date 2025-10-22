@@ -1,0 +1,175 @@
+/* 主题切换器 */
+.theme-switcher {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.theme-switcher-button {
+  display: absolute;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-switcher-button:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+.theme-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* 主题下拉菜单 - 横向布局 */
+.theme-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid var(--color-primary);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 主题选项 - 只显示颜色圆点 */
+.theme-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  border-radius: 50%;
+}
+
+.theme-option:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transform: scale(1.1);
+}
+
+.theme-option.active {
+  background: rgba(var(--color-primary-rgb, 232, 93, 159), 0.1);
+}
+
+/* 颜色圆点 */
+.theme-color-preview {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.theme-option:hover .theme-color-preview {
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 隐藏主题名称文字 */
+.theme-option-name {
+  display: none;
+}
+
+/* 勾选标记 - 显示在颜色圆点上 */
+.theme-check {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+/* 响应式设计 - 平板 */
+@media (max-width: 768px) {
+  .theme-switcher {
+    top: 15px;
+    right: 15px;
+  }
+
+  .theme-switcher-button {
+    padding: 8px;
+  }
+
+  .theme-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .theme-dropdown {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .theme-color-preview {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* 响应式设计 - 手机 - 统一样式 */
+@media (max-width: 480px) {
+  .theme-switcher {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+  }
+
+  .theme-switcher-button {
+    padding: 8px;  /* 与PC端一致 */
+    background: transparent;  /* 与PC端一致 */
+    border-radius: 0;  /* 与PC端一致 */
+    box-shadow: none;  /* 与PC端一致 */
+  }
+
+  .theme-icon {
+    width: 32px;  /* 与PC端一致 */
+    height: 32px;  /* 与PC端一致 */
+  }
+
+  .theme-dropdown {
+    padding: 8px 12px;  /* 与PC端一致 */
+    gap: 8px;  /* 与PC端一致 */
+  }
+
+  .theme-color-preview {
+    width: 28px;  /* 与PC端一致 */
+    height: 28px;  /* 与PC端一致 */
+  }
+}
+

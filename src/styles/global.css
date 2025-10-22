@@ -1,6 +1,22 @@
 /* 全局传统文化设计风格 */
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap&subset=chinese-simplified');
+/* 引入自定义字体 - 正文字体 */
+@font-face {
+  font-family: 'HYNianHuaSong';
+  src: url('/HYWenRunSongYunU.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 引入自定义字体 - 首页标题字体 */
+@font-face {
+  font-family: 'HYWenRunSongYun';
+  src: url('/yunxiWord.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   /* 传统配色方案 - 粉红色主题 */
@@ -12,8 +28,9 @@
   --color-border: #F0D9E8;       /* 浅粉 - 边框色 */
 
   /* 字体 */
-  --font-serif: 'Noto Serif SC', 'SimSun', serif;
+  --font-serif: 'HYNianHuaSong', 'Noto Serif SC', 'SimSun', serif;
   --font-sans: 'SimHei', 'Microsoft YaHei', sans-serif;
+  --font-title: 'HYWenRunSongYun', 'SimHei', 'Microsoft YaHei', sans-serif;
 
   /* 间距 */
   --spacing-xs: 8px;
@@ -40,6 +57,7 @@ body {
   background-attachment: fixed;
   font-family: var(--font-serif);
   color: var(--color-dark);
+  font-size: 115%; /* 增加基础字体大小 15% */
 }
 
 /* 标题样式 - 使用传统字体 */

@@ -1,14 +1,16 @@
 import { Link } from 'react-router-dom';
 import { characters } from '../data/characters';
+import ThemeSwitcher from '../components/ThemeSwitcher';
 import '../styles/Home.css';
 
 export default function Home() {
   return (
     <div className="home">
       <header className="header">
+        <ThemeSwitcher />
         <div className="header-content">
           <h1 className="title">焕影清音</h1>
-          <p className="subtitle">华县皮影的前世今生</p>
+          <p className="subtitle">——华县皮影的前世今生</p>
         </div>
       </header>
 
@@ -51,7 +53,34 @@ export default function Home() {
       </main>
 
       <footer className="footer">
-        <p>&copy; 2024 华县皮影文化传承中心 | 焕影清音</p>
+        <div className="footer-content">
+          <div className="footer-section">
+            <h3 className="footer-title">关于焕影清音</h3>
+            <p className="footer-description">
+              致力于传承和弘扬华县皮影艺术，记录传承人的故事，让传统文化焕发新的生命力。
+            </p>
+          </div>
+
+          <div className="footer-section">
+            <h3 className="footer-title">联系我们</h3>
+            <p className="footer-link">邮箱：contact@huanyingqingyin.com</p>
+            <p className="footer-link">电话：+86 123-4567-8900</p>
+          </div>
+
+          <div className="footer-section">
+            <h3 className="footer-title">相关链接</h3>
+            <p className="footer-link">
+              <a href="#" className="footer-anchor">华县文化馆</a>
+            </p>
+            <p className="footer-link">
+              <a href="#" className="footer-anchor">非物质文化遗产网</a>
+            </p>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <p className="footer-text">© 2025 焕影清音 - 传承华县皮影艺术</p>
+        </div>
       </footer>
     </div>
   );
