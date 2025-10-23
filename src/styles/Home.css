@@ -1,5 +1,14 @@
 /* 首页样式 */
 
+/* 引入自定义字体 - 专门用于"焕影清音"标题 */
+@font-face {
+  font-family: 'MonsterWord';
+  src: url('/monsterWord.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .home {
   min-height: 100vh;
   display: flex;
@@ -62,12 +71,13 @@
   z-index: 1;
 }
 
+/* 首页主标题 - 使用 MonsterWord 字体 */
 .title {
   font-size: 4rem; /* 3.5 * 1.15 ≈ 4 */
   font-weight: 700;
   margin: 0 0 10px 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  font-family: var(--font-title);
+  font-family: 'MonsterWord', 'SimHei', 'Microsoft YaHei', sans-serif;
   letter-spacing: 2px;
   color: #ffffff;
 }

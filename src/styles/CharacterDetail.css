@@ -7,9 +7,9 @@
  * 4. 优化背景图片和卡片的渲染性能
  */
 
-/* 引入自定义字体 */
+/* 引入自定义字体 - 专门用于"焕影清音"标题 */
 @font-face {
-  font-family: 'YunxiWord';
+  font-family: 'MonsterWord';
   src: url('/monsterWord.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
@@ -100,9 +100,9 @@
   z-index: 2;
 }
 
-/* 标题栏主标题 */
+/* 标题栏主标题 - 使用 MonsterWord 字体 */
 .header-title {
-  font-family: 'YunxiWord', 'SimHei', 'Microsoft YaHei', sans-serif;
+  font-family: 'MonsterWord', 'SimHei', 'Microsoft YaHei', sans-serif;
   font-size: 3.45rem; /* 3 * 1.15 = 3.45 */
   color: #ffffff;
   margin: 0;
