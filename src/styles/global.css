@@ -9,9 +9,18 @@
   font-display: swap;
 }
 
-/* 引入自定义字体 - 首页标题字体 */
+/* 引入自定义字体 - 标题字体 */
 @font-face {
   font-family: 'HYWenRunSongYun';
+  src: url('/HYWenRunSongU.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 引入自定义字体 - 特殊标题字体 */
+@font-face {
+  font-family: 'YunxiWord';
   src: url('/yunxiWord.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
@@ -30,7 +39,7 @@
   /* 字体 */
   --font-serif: 'HYNianHuaSong', 'Noto Serif SC', 'SimSun', serif;
   --font-sans: 'SimHei', 'Microsoft YaHei', sans-serif;
-  --font-title: 'HYWenRunSongYun', 'SimHei', 'Microsoft YaHei', sans-serif;
+  --font-title: 'YunxiWord', 'HYWenRunSongYun', 'SimHei', 'Microsoft YaHei', sans-serif;
 
   /* 间距 */
   --spacing-xs: 8px;

@@ -1,4 +1,11 @@
-/* 详情页样式 */
+/* 详情页样式 - 性能优化版本 */
+/*
+ * 优化内容：
+ * 1. 统一缩小正文字体（PC/平板/手机）：1.05rem
+ * 2. 使用 will-change 和 transform 优化渲染性能
+ * 3. 使用 contain 属性减少重绘范围
+ * 4. 优化背景图片和卡片的渲染性能
+ */
 
 /* 引入自定义字体 */
 @font-face {
@@ -19,9 +26,11 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  /* 性能优化 */
+  will-change: scroll-position;
 }
 
-/* 毛玻璃遮罩层 */
+/* 毛玻璃遮罩层 - 优化性能 */
 .detail-container::before {
   content: "";
   position: fixed;
@@ -34,6 +43,9 @@
   -webkit-backdrop-filter: blur(8px);
   z-index: 0;
   pointer-events: none;
+  /* 性能优化 */
+  will-change: opacity;
+  transform: translateZ(0);
 }
 
 /* 确保所有内容在毛玻璃层之上 */
@@ -208,7 +220,7 @@
   gap: 30px;
 }
 
-/* 描述部分 - 包含图片和文字 */
+/* 描述部分 - 包含图片和文字 - 优化加载性能 */
 .description-section {
   background-image: url('/huabubeijing2.png');
   background-size: cover;
@@ -219,6 +231,10 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   border: 1px solid var(--color-border);
   position: relative;
+  /* 性能优化 */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* 为描述部分添加半透明白色遮罩，增强文字可读性 */
@@ -233,6 +249,8 @@
   border-radius: 12px;
   z-index: 0;
   pointer-events: none;
+  /* 性能优化 */
+  will-change: opacity;
 }
 
 /* 确保内容在遮罩之上 */
@@ -258,7 +276,7 @@
   justify-content: center;
 }
 
-/* 英雄图片 */
+/* 英雄图片 - 优化加载性能 */
 .detail-hero {
   border-radius: 8px;
   overflow: hidden;
@@ -269,6 +287,8 @@
   background: transparent;  /* 改为透明背景 */
   width: 100%;
   border: none;  /* 确保没有边框 */
+  /* 性能优化 */
+  contain: layout style paint;
 }
 
 .detail-image {
@@ -278,9 +298,14 @@
   display: block;
   max-width: 100%;
   border: none;  /* 确保图片没有边框 */
+  /* 性能优化 */
+  will-change: transform;
+  transform: translateZ(0);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
-/* 成就和视频部分 - 卡片样式 */
+/* 成就和视频部分 - 卡片样式 - 优化加载性能 */
 .achievements-section,
 .video-section {
   margin-bottom: 30px;
@@ -293,6 +318,10 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   border: 1px solid var(--color-border);
   position: relative;
+  /* 性能优化 */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* 为成就和视频部分添加半透明白色遮罩，增强文字可读性 */
@@ -308,6 +337,8 @@
   border-radius: 12px;
   z-index: 0;
   pointer-events: none;
+  /* 性能优化 */
+  will-change: opacity;
 }
 
 /* 确保内容在遮罩之上 */
@@ -368,12 +399,12 @@
   flex-shrink: 0;
 }
 
-/* 描述文本 */
+/* 描述文本 - 统一缩小字体 */
 .description-text {
   line-height: 1.8;
   color: #5a4a3a;
   font-family: var(--font-serif);
-  font-size: 1.26rem; /* 1.05 * 1.2 = 1.26，加大一号 */
+  font-size: 1.05rem; /* 缩小字体，PC/平板/手机统一 */
 }
 
 .description-text p {
@@ -385,7 +416,7 @@
   margin-bottom: 0;
 }
 
-/* 成就列表 */
+/* 成就列表 - 统一缩小字体 */
 .achievements-list {
   list-style: none;
   padding: 0;
@@ -397,7 +428,7 @@
   position: relative;
   color: #5a4a3a;
   font-family: var(--font-serif);
-  font-size: 1.2rem; /* 1 * 1.2 = 1.2，加大一号 */
+  font-size: 1.05rem; /* 缩小字体，与描述文本一致 */
   line-height: 1.6;
 }
 
@@ -409,7 +440,7 @@
   font-size: 1.2rem;
 }
 
-/* 视频部分 */
+/* 视频部分 - 优化加载性能 */
 .video-wrapper {
   position: relative;
   width: 100%;
@@ -420,6 +451,9 @@
   justify-content: center;
   align-items: center;
   /* 优先展示全视频，使用 object-fit: contain */
+  /* 性能优化 */
+  contain: layout style paint;
+  will-change: transform;
 }
 
 /* 外部 iframe 视频（如 YouTube） */
@@ -429,6 +463,8 @@
   aspect-ratio: 16 / 9;
   border-radius: 8px;
   display: block;
+  /* 性能优化 */
+  transform: translateZ(0);
 }
 
 /* 本地视频播放器 */
@@ -439,6 +475,8 @@
   border-radius: 8px;
   object-fit: contain;
   display: block;
+  /* 性能优化 */
+  transform: translateZ(0);
 }
 
 /* 页脚 */
@@ -597,13 +635,7 @@
     margin-left: 8px;
   }
 
-  .description-text {
-    font-size: 1.2rem; /* 1 * 1.2 = 1.2，加大一号 */
-  }
-
-  .achievements-list li {
-    font-size: 1.2rem; /* 1 * 1.2 = 1.2，加大一号 */
-  }
+  /* 平板端正文字体已在基础样式中统一设置为 1.05rem */
 
   /* 平板视频容器 */
   .video-wrapper .video-iframe {
@@ -722,19 +754,9 @@
     margin-left: 6px;
   }
 
-  .description-text {
-    font-size: 1.2rem !important; /* 1 * 1.2 = 1.2，手机端缩小一号，使用!important确保生效 */
-    line-height: 1.8 !important;
-  }
-
-  .description-text p {
-    margin-bottom: 15px;
-    font-size: 1.2rem !important; /* 确保段落字体大小生效 */
-  }
-
+  /* 手机端正文字体已在基础样式中统一设置为 1.05rem */
   .achievements-list li {
     padding: 10px 0 10px 25px;
-    font-size: 1.2rem !important; /* 1 * 1.2 = 1.2，与人物介绍正文一致，使用!important确保生效 */
   }
 
   /* 手机视频容器 - 优先展示全视频 */
