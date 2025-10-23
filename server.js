@@ -43,7 +43,8 @@ app.use(express.static(join(__dirname, 'dist'), {
 }));
 
 // 处理 SPA 路由 - 所有请求都返回 index.html
-app.get('*', (_req, res) => {
+// Express 5.x 不支持 '*'，使用正则表达式匹配所有路径
+app.get(/.*/, (_req, res) => {
   res.sendFile(join(__dirname, 'dist', 'index.html'));
 });
 
