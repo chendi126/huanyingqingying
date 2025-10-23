@@ -7,10 +7,10 @@
  * 4. 优化背景图片和卡片的渲染性能
  */
 
-/* 引入自定义字体 - 专门用于"焕影清音"标题 */
+/* 引入自定义字体 - 专门用于"焕影清音"标题（优化后的 WOFF 格式） */
 @font-face {
   font-family: 'MonsterWord';
-  src: url('/monsterWord.ttf') format('truetype');
+  src: url('/monsterWord-subset.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;

@@ -1,15 +1,15 @@
 /* 全局传统文化设计风格 */
 
-/* 引入自定义字体 - 正文字体 */
+/* 引入自定义字体 - 正文字体（优化后的 WOFF 格式） */
 @font-face {
   font-family: 'HYNianHuaSong';
-  src: url('/HYWenRunSongYunU.ttf') format('truetype');
+  src: url('/HYWenRunSongYunU-subset.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
-/* 引入自定义字体 - 标题字体 */
+/* 引入自定义字体 - 标题字体（保留原 TTF，如需优化请提供 WOFF 文件） */
 @font-face {
   font-family: 'HYWenRunSongYun';
   src: url('/HYNianHuaSongU.ttf') format('truetype');
@@ -18,10 +18,10 @@
   font-display: swap;
 }
 
-/* 引入自定义字体 - 特殊标题字体 */
+/* 引入自定义字体 - 特殊标题字体（优化后的 WOFF 格式） */
 @font-face {
   font-family: 'YunxiWord';
-  src: url('/yunxiWord.ttf') format('truetype');
+  src: url('/yunxiWord-subset.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
