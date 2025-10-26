@@ -3,7 +3,7 @@
 /* 引入自定义字体 - 正文字体（优化后的 WOFF 格式） */
 @font-face {
   font-family: 'HYNianHuaSong';
-  src: url('/HYWenRunSongYunU-subset.woff') format('woff');
+  src: url('/HYWenRunSongYunU.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
