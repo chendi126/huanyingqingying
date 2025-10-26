@@ -28,10 +28,10 @@ const themes = {
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  // 从 localStorage 读取保存的主题，默认为 theme1
+  // 从 localStorage 读取保存的主题，默认为 theme2（经典红）
   const [currentTheme, setCurrentTheme] = useState(() => {
     const saved = localStorage.getItem('selectedTheme');
-    return saved || 'theme1';
+    return saved || 'theme2';
   });
 
   // 应用主题到 CSS 变量

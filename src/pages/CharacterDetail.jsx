@@ -127,16 +127,18 @@ export default function CharacterDetail() {
           <div className="footer-section">
             <h3 className="footer-title">联系我们</h3>
             <p className="footer-link">邮箱：contact@huanyingqingyin.com</p>
-            <p className="footer-link">电话：+86 123-4567-8900</p>
+            <p className="footer-link">
+              <a href="https://sxy.xaufe.edu.cn/" target="_blank" rel="noopener noreferrer" className="footer-anchor">西安财经大学商学院</a>
+            </p>
           </div>
 
           <div className="footer-section">
             <h3 className="footer-title">相关链接</h3>
             <p className="footer-link">
-              <a href="#" className="footer-anchor">华县文化馆</a>
+              <a href="https://www.ihchina.cn/art/detail/id/27982.html" target="_blank" rel="noopener noreferrer" className="footer-anchor">中国非物质文化遗产网</a>
             </p>
             <p className="footer-link">
-              <a href="#" className="footer-anchor">非物质文化遗产网</a>
+              <a href="https://www.sxfycc.com/home/Index/library_detail.html?id=160" target="_blank" rel="noopener noreferrer" className="footer-anchor">陕西省非物质文化遗产网</a>
             </p>
           </div>
         </div>
