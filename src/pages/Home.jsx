@@ -63,7 +63,6 @@ export default function Home() {
 
           <div className="footer-section">
             <h3 className="footer-title">联系我们</h3>
-            <p className="footer-link">邮箱：contact@huanyingqingyin.com</p>
             <p className="footer-link">
               <a href="https://sxy.xaufe.edu.cn/" target="_blank" rel="noopener noreferrer" className="footer-anchor">西安财经大学商学院</a>
             </p>
