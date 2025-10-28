@@ -214,7 +214,7 @@
   font-size: 1.5rem; /* 1.3 * 1.15 ≈ 1.5 */
   color: var(--color-primary);
   margin: 0 0 8px 0;
-  font-family: var(--font-title);
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;
   font-weight: 600;
 }
 
@@ -291,8 +291,12 @@
   font-family: var(--font-serif);
   font-size: 1.04rem; /* 0.9 * 1.15 ≈ 1.04 */
   color: var(--color-dark);
-  margin: 0;
+  margin: 0 0 8px 0;
   letter-spacing: 1px;
+}
+
+.footer-text:last-child {
+  margin-bottom: 0;
 }
 
 /* 响应式设计 - 平板 */

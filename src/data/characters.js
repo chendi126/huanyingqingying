@@ -3,8 +3,8 @@ export const characters = [
   {
     id: 1,
     name: "党飞华",
-    title: "汪氏皮影主理人、第五代传承人",
-    thumbnail: "/dangfeihua.png",
+    title: "皮影主理人、第五代传承人",
+    thumbnail: "/dangfeihuaHome.png",
     image: "/dangfeihua.png",
     description: `党飞华，男，2000年出生，汪氏皮影主理人、第五代传承人。党飞华的外公汪天稳是国家级非遗项目皮影戏代表性传承人，母亲汪海燕是汪氏皮影第四代传承人，也是陕西省工艺美术大师，他从小耳濡目染，跟着外公和母亲学习皮影雕刻技艺。
 
@@ -46,7 +46,7 @@ export const characters = [
     id: 3,
     name: "薛宏权",
     title: "国家级非遗传承人、中国工艺美术大师",
-    thumbnail: "/xuehongquan.png",
+    thumbnail: "/xuehongquanHome.png",
     image: "/xuehongquan.png",
     description: `薛宏权，1985年从事华州皮影制作技艺至今近四十年，国家级非遗项目华县皮影戏制作技艺代表性传承人、中国工艺美术大师、正高级工艺美术师、全国乡村工匠，被誉为"振兴传统皮影艺术的领军人物"。
 
@@ -73,7 +73,7 @@ export const characters = [
     id: 4,
     name: "汪天稳",
     title: "中国工艺美术大师、国家级传承人",
-    thumbnail: "/wangtianwen.png",
+    thumbnail: "/wangtianwenHome.png",
     image: "/wangtianwen.png",
     description: `汪天稳，男，汉族，1950年5月2日出生，陕西省渭南市人。第一批国家级非物质文化遗产项目皮影戏（华县皮影戏）代表性传承人，中国工艺美术大师，陕西省皮影协会主席，中国当代皮影艺术第一人。
 
@@ -95,7 +95,7 @@ export const characters = [
     id: 5,
     name: "汪海燕",
     title: "陕西省工艺美术大师",
-    thumbnail: "/wanghaiyan.png",
+    thumbnail: "/wanghaiyanHome.png",
     image: "/wanghaiyan.png",
     description: `汪海燕，第三届陕西省一级工艺美术大师，华州皮影非遗传承人。2018年度"西安工匠"，国家级非物质文化遗产项目"华县皮影戏"区级传承人，中国十佳民间艺人。
 

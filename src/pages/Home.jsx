@@ -77,6 +77,8 @@ export default function Home() {
             <p className="footer-link">
               <a href="https://www.sxfycc.com/home/Index/library_detail.html?id=160" target="_blank" rel="noopener noreferrer" className="footer-anchor">陕西省非物质文化遗产网</a>
             </p>
+            <p className="footer-link" style={{ marginTop: '15px' }}>制作人：陈笛</p>
+            <p className="footer-link">艺术视觉：李商文昱</p>
           </div>
         </div>
 

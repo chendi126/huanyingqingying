@@ -3,7 +3,7 @@
 /* 引入自定义字体 - 正文字体（优化后的 WOFF 格式） */
 @font-face {
   font-family: 'HYNianHuaSong';
-  src: url('/HYWenRunSongYunU.woff') format('woff');
+  src: url('/HYWenRunSongYunU-subset.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -37,7 +37,7 @@
   --color-border: #F0D9E8;       /* 浅粉 - 边框色 */
 
   /* 字体 */
-  --font-serif: 'HYNianHuaSong', 'Noto Serif SC', 'SimSun', serif;
+  --font-serif: 'HYNianHuaSong', 'Noto Serif SC', 'KaiTi', 'STKaiti', 'SimSun', serif;
   --font-sans: 'SimHei', 'Microsoft YaHei', sans-serif;
   --font-title: 'YunxiWord', 'HYWenRunSongYun', 'SimHei', 'Microsoft YaHei', sans-serif;
 
