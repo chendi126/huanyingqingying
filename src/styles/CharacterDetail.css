@@ -161,31 +161,101 @@
   padding: 40px 20px;
 }
 
-/* 详情头部 - 标题和副标题 */
-.detail-header-section {
+/* 顶部区域：左侧图片，右侧姓名和代表作品 */
+.character-top-section {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 40px;
   margin-bottom: 40px;
+  align-items: stretch;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  position: relative;
+  border: 3px solid transparent;
+  background-clip: padding-box;
 }
 
-.detail-name {
-  font-size: 3.45rem; /* 2.88 * 1.2 = 3.45，加大一号 */
+/* 对角渐变红色边框 */
+.character-top-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  padding: 3px;
+  background: linear-gradient(135deg,
+    var(--color-primary) 0%,
+    transparent 30%,
+    transparent 70%,
+    var(--color-primary) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.character-image-container {
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  position: relative;
+  z-index: 1;
+}
+
+.character-main-image {
+  width: auto;
+  height: 100%;
+  max-height: 280px;
+  display: block;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.character-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  min-height: 280px;
+  max-width: 500px;
+  position: relative;
+  z-index: 1;
+}
+
+.character-name {
+  font-size: 3.5rem;
   color: var(--color-primary);
-  margin: 0 0 10px 0;
+  margin: 0;
   font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;
   font-weight: 700;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 15px;
 }
 
-/* 姓名文字 */
-.detail-name .name-text {
+.character-name .name-text {
   display: inline-flex;
   align-items: center;
 }
 
-/* 姓名装饰图标 */
-.detail-name .name-icon {
+.character-name .name-icon {
   height: 1.2em;
   width: auto;
   vertical-align: middle;
@@ -193,290 +263,321 @@
   flex-shrink: 0;
 }
 
-.detail-title {
+.character-representative-work {
   font-size: 1.2rem;
-  color: var(--color-secondary);
+  color: var(--color-dark);
   margin: 0;
   font-family: var(--font-serif);
-  padding-bottom: 20px;
-  border-bottom: 2px solid var(--color-border);
+  line-height: 1.8;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.work-label {
+  display: none;
+}
+
+.work-content {
+  color: var(--color-dark);
+}
+
+/* 信息卡片区域 */
+.info-card-section {
+  background: transparent;
+  border-radius: 20px;
+  overflow: visible;
   position: relative;
+  padding: 20px;
 }
 
-.detail-title::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
-}
-
-/* 主布局 */
-.detail-main-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-/* 描述部分 - 包含图片和文字 - 优化加载性能 */
-.description-section {
-  background-image: url('/huabubeijing2.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border: 1px solid var(--color-border);
-  position: relative;
-  /* 性能优化 */
-  will-change: transform;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
-
-/* 为描述部分添加半透明白色遮罩，增强文字可读性 */
-.description-section::before {
+/* 左上角 L 形装饰线条 - 最外层 */
+.info-card-section::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  z-index: 0;
+  width: 120px;
+  height: 120px;
+  border-top: 3px solid var(--color-primary);
+  border-left: 3px solid var(--color-primary);
   pointer-events: none;
-  /* 性能优化 */
-  will-change: opacity;
+  opacity: 0.8;
+  z-index: 10;
 }
 
-/* 确保内容在遮罩之上 */
-.description-section > * {
-  position: relative;
-  z-index: 1;
+/* 右下角 L 形装饰线条 - 最外层 */
+.info-card-section::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  border-bottom: 3px solid var(--color-primary);
+  border-right: 3px solid var(--color-primary);
+  pointer-events: none;
+  opacity: 0.8;
+  z-index: 10;
 }
 
-.description-container {
+
+
+/* 标签页导航 */
+.tabs-navigation {
   display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 30px;
-  align-items: start;
-}
-
-.description-left {
-  display: flex;
-  flex-direction: column;
-}
-
-.description-right {
-  display: flex;
-  justify-content: center;
-}
-
-/* 英雄图片 - 优化加载性能 */
-.detail-hero {
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: none;  /* 移除阴影 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: transparent;  /* 改为透明背景 */
-  width: 100%;
-  border: none;  /* 确保没有边框 */
-  /* 性能优化 */
-  contain: layout style paint;
-}
-
-.detail-image {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  max-width: 100%;
-  border: none;  /* 确保图片没有边框 */
-  /* 性能优化 */
-  will-change: transform;
-  transform: translateZ(0);
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-}
-
-/* 成就和视频部分 - 卡片样式 - 优化加载性能 */
-.achievements-section,
-.video-section {
-  margin-bottom: 30px;
-  background-image: url('/huabubeijing2.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border: 1px solid var(--color-border);
+  grid-template-columns: repeat(3, 1fr);
+  background: transparent;
+  border-bottom: none;
   position: relative;
-  /* 性能优化 */
-  will-change: transform;
-  transform: translateZ(0);
-  backface-visibility: hidden;
+  padding: 8px 8px 0 8px;
+  gap: 8px;
 }
 
-/* 为成就和视频部分添加半透明白色遮罩，增强文字可读性 */
-.achievements-section::before,
-.video-section::before {
+.tab-button {
+  padding: 18px 25px 18px 45px;
+  font-size: 1.6rem;
+  font-family: var(--font-title);
+  font-weight: 600;
+  color: #666;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  letter-spacing: 3px;
+  border-radius: 8px 8px 0 0;
+}
+
+.tab-button:hover {
+  color: var(--color-primary);
+}
+
+.tab-button.active {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* 选中状态的左侧皮影图标 - 默认 */
+.tab-button.active::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  z-index: 0;
-  pointer-events: none;
-  /* 性能优化 */
-  will-change: opacity;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-/* 确保内容在遮罩之上 */
-.achievements-section > *,
-.video-section > * {
+/* 第一个标签 - 形·皮相 */
+.tab-button:nth-child(1).active::before {
+  background-image: url('/piying1.png');
+}
+
+/* 第二个标签 - 神·骨相 */
+.tab-button:nth-child(2).active::before {
+  background-image: url('/piying2.png');
+}
+
+/* 第三个标签 - 美·真如 */
+.tab-button:nth-child(3).active::before {
+  background-image: url('/piying3.png');
+}
+
+/* 标签页内容 */
+.tabs-content {
+  padding: 45px;
+  min-height: 450px;
+  background: transparent;
+  position: relative;
+  border-top: none;
+}
+
+.tab-panel {
   position: relative;
   z-index: 1;
 }
 
-.description-section h2,
-.achievements-section h2,
-.video-section h2 {
-  font-size: 1.8rem; /* 1.5 * 1.2 = 1.8，加大一号 */
+/* 淡入动画 */
+.fade-in {
+  animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.tab-panel-title {
+  font-size: 1.9rem;
   color: var(--color-primary);
-  margin: 0 0 20px 0;
+  margin: 0 0 30px 0;
   font-family: var(--font-title);
-  padding-bottom: 15px;
+  padding: 0 0 18px 0;
   border-bottom: 2px solid var(--color-primary);
   position: relative;
   display: flex;
   align-items: center;
+  gap: 12px;
+  text-shadow: 0 2px 4px rgba(232, 93, 159, 0.1);
 }
 
-.description-section h2::before,
-.achievements-section h2::before,
-.video-section h2::before {
+/* 标题左侧装饰 */
+.tab-panel-title::before {
   content: "✦";
   color: var(--color-primary);
-  margin-right: 8px;
-  font-size: 0.9em;
+  font-size: 1.1em;
+  text-shadow: 0 0 8px var(--color-primary);
+  animation: pulse 2s ease-in-out infinite;
 }
 
-.description-section h2::after,
-.achievements-section h2::after,
-.video-section h2::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
 }
 
-/* 标题文字容器 */
-.section-title .title-text {
+
+
+.tab-panel-title .title-text {
   display: inline-flex;
   align-items: center;
+  letter-spacing: 2px;
 }
 
-/* 标题装饰图标 */
-.section-title .title-icon {
-  height: 1.4em;
+.tab-panel-title .title-icon {
+  height: 1.5em;
   width: auto;
-  margin-left: 10px;
+  margin-left: 12px;
   vertical-align: middle;
   object-fit: contain;
   flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(232, 93, 159, 0.3));
 }
 
-/* 描述文本 - 统一缩小字体 */
-.description-text {
-  line-height: 1.8;
-  color: #5a4a3a;
+.tab-panel-content {
+  line-height: 2;
+  color: #4a4a4a;
   font-family: var(--font-serif);
-  font-size: 1.05rem; /* 缩小字体，PC/平板/手机统一 */
+  font-size: 1.15rem;
 }
 
-.description-text p {
-  margin: 0 0 15px 0;
+.tab-panel-content p {
+  margin: 0 0 18px 0;
   text-align: justify;
+  text-indent: 2em;
 }
 
-.description-text p:last-child {
+.tab-panel-content p:last-child {
   margin-bottom: 0;
 }
 
-/* 成就列表 - 统一缩小字体 */
+/* 成就列表样式 */
 .achievements-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .achievements-list li {
-  padding: 12px 0 12px 30px;
+  padding: 8px 0 8px 35px;
   position: relative;
-  color: #5a4a3a;
+  color: #4a4a4a;
   font-family: var(--font-serif);
-  font-size: 1.05rem; /* 缩小字体，与描述文本一致 */
-  line-height: 1.6;
+  font-size: 1.1rem;
+  line-height: 1.9;
+  transition: all 0.3s ease;
+}
+
+.achievements-list li:hover {
+  color: var(--color-primary);
 }
 
 .achievements-list li:before {
   content: "✦";
   position: absolute;
-  left: 0;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   color: var(--color-primary);
   font-size: 1.2rem;
 }
 
-/* 视频部分 - 优化加载性能 */
+/* 视频部分 */
 .video-wrapper {
   position: relative;
   width: 100%;
   overflow: hidden;
-  border-radius: 8px;
-  background: #000;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #1a1a1a, #000);
   display: flex;
   justify-content: center;
   align-items: center;
-  /* 优先展示全视频，使用 object-fit: contain */
-  /* 性能优化 */
-  contain: layout style paint;
-  will-change: transform;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    0 0 0 3px rgba(232, 93, 159, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 8px;
 }
 
-/* 外部 iframe 视频（如 YouTube） */
+/* 视频装饰边框 */
+.video-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 50%,
+    var(--color-primary) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 .video-wrapper .video-iframe {
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
-  border-radius: 8px;
+  border-radius: 12px;
   display: block;
-  /* 性能优化 */
-  transform: translateZ(0);
+  position: relative;
+  z-index: 1;
 }
 
-/* 本地视频播放器 */
 .video-wrapper .video-player {
   width: 100%;
   height: auto;
   max-width: 100%;
-  border-radius: 8px;
+  border-radius: 12px;
   object-fit: contain;
   display: block;
-  /* 性能优化 */
-  transform: translateZ(0);
+  position: relative;
+  z-index: 1;
 }
 
 /* 页脚 */
@@ -595,6 +696,111 @@
     padding: 30px 15px;
   }
 
+  /* 顶部区域响应式 */
+  .character-top-section {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 25px;
+  }
+
+  .character-image-container {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .character-main-image {
+    max-height: 180px;
+  }
+
+  .character-name {
+    font-size: 2.5rem;
+    gap: 12px;
+  }
+
+  .character-name .name-icon {
+    height: 1.1em;
+  }
+
+  .character-representative-work {
+    font-size: 1.1rem;
+    padding: 0;
+  }
+
+  /* 信息卡片区域装饰线条 - 平板端 */
+  .info-card-section {
+    padding: 15px;
+  }
+
+  .info-card-section::before {
+    width: 90px;
+    height: 90px;
+    border-width: 2.5px;
+  }
+
+  .info-card-section::after {
+    width: 90px;
+    height: 90px;
+    border-width: 2.5px;
+  }
+
+  /* 标签页导航 */
+  .tabs-navigation {
+    padding: 6px 6px 0 6px;
+    gap: 6px;
+  }
+
+  .tab-button {
+    padding: 14px 18px 14px 42px;
+    font-size: 1.35rem;
+    letter-spacing: 2px;
+  }
+
+  .tab-button.active::before {
+    width: 24px;
+    height: 24px;
+    left: 10px;
+  }
+
+  /* 标签页内容 */
+  .tabs-content {
+    padding: 35px 25px;
+    min-height: 380px;
+  }
+
+  .tab-panel-title {
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+  }
+
+  .tab-panel-title .title-icon {
+    height: 1.4em;
+    margin-left: 10px;
+  }
+
+  .tab-panel-content {
+    font-size: 1.05rem;
+  }
+
+  .achievements-list li {
+    font-size: 1.05rem;
+    padding: 8px 0 8px 32px;
+  }
+
+  .achievements-list li:before {
+    left: 8px;
+    font-size: 1.15rem;
+  }
+
+  .video-wrapper .video-iframe {
+    aspect-ratio: 16 / 9;
+  }
+
+  .video-wrapper .video-player {
+    max-height: 400px;
+  }
+
   .back-button-container {
     padding: 25px 15px;
   }
@@ -608,64 +814,22 @@
     grid-template-columns: 1fr;
     gap: 30px;
   }
-
-  .description-container {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .detail-name {
-    font-size: 2.4rem; /* 2 * 1.2 = 2.4，加大一号 */
-  }
-
-  /* 平板端姓名图标 */
-  .detail-name .name-icon {
-    height: 1.1em;
-  }
-
-  .detail-title {
-    font-size: 1.1rem;
-  }
-
-  .description-section h2,
-  .achievements-section h2,
-  .video-section h2 {
-    font-size: 1.56rem; /* 1.3 * 1.2 = 1.56，加大一号 */
-  }
-
-  /* 平板端标题图标 */
-  .section-title .title-icon {
-    height: 1.3em;
-    margin-left: 8px;
-  }
-
-  /* 平板端正文字体已在基础样式中统一设置为 1.05rem */
-
-  /* 平板视频容器 */
-  .video-wrapper .video-iframe {
-    aspect-ratio: 16 / 9;
-  }
-
-  .video-wrapper .video-player {
-    max-height: 400px;
-  }
 }
 
 /* 响应式设计 - 手机 */
 @media (max-width: 480px) {
-  /* 手机端背景优化 - 与PC端统一，确保背景图片完整显示 */
+  /* 手机端背景优化 */
   .detail-container {
-    background-size: cover;  /* 保持覆盖整个容器 */
-    background-position: center;  /* 居中显示 */
-    background-attachment: fixed;  /* 改回 fixed，与PC端一致 */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
   }
 
-  /* 手机端毛玻璃效果优化 - 与PC端统一 */
   .detail-container::before {
-    position: fixed;  /* 改回 fixed，与PC端一致 */
-    background: rgba(255, 255, 255, 0.3);  /* 与PC端一致 */
-    backdrop-filter: blur(8px);  /* 与PC端一致 */
-    -webkit-backdrop-filter: blur(8px);  /* 与PC端一致 */
+    position: fixed;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   /* 手机端标题栏 */
@@ -679,91 +843,142 @@
   }
 
   .header-title {
-    font-size: 2.5rem;
-    letter-spacing: 4px;
+    font-size: 2rem;
+    letter-spacing: 3px;
   }
 
   .header-subtitle {
-    font-size: 1.2rem;
+    font-size: 1rem;
     letter-spacing: 1px;
-  }
-
-  .back-button {
-    font-size: 0.9rem;
-    padding: 6px 12px;
   }
 
   .detail-content {
     padding: 20px 10px;
   }
 
-  .description-container {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  /* 顶部区域响应式 - 手机端并排显示 */
+  .character-top-section {
+    grid-template-columns: auto auto;
+    gap: 12px;
+    align-items: stretch;
+    padding: 15px;
   }
 
-  .detail-image {
-    max-height: 300px;
+  .character-image-container {
+    padding: 0;
+    width: fit-content;
   }
 
-  .detail-name {
-    font-size: 1.8rem; /* 1.5 * 1.2 = 1.8，加大一号 */
-    margin-bottom: 8px;
+  .character-main-image {
+    max-height: 160px;
+    width: auto;
+  }
+
+  .character-info-container {
+    padding: 0;
+    gap: 12px;
+    min-height: auto;
+  }
+
+  .character-name {
+    font-size: 1.6rem;
     gap: 8px;
+    flex-wrap: wrap;
   }
 
-  /* 手机端姓名图标 */
-  .detail-name .name-icon {
-    height: 1em;
+  .character-name .name-icon {
+    height: 0.9em;
   }
 
-  .detail-title {
-    font-size: 1rem;
+  .character-representative-work {
+    font-size: 0.95rem;
+    padding: 0;
+  }
+
+  /* 信息卡片区域装饰线条 - 手机端 */
+  .info-card-section {
+    padding: 10px;
+  }
+
+  .info-card-section::before {
+    width: 70px;
+    height: 70px;
+    border-width: 2px;
+  }
+
+  .info-card-section::after {
+    width: 70px;
+    height: 70px;
+    border-width: 2px;
+  }
+
+  /* 标签页导航 */
+  .tabs-navigation {
+    padding: 5px 5px 0 5px;
+    gap: 5px;
+  }
+
+  .tab-button {
+    padding: 12px 10px 12px 32px;
+    font-size: 1.15rem;
+    letter-spacing: 1.5px;
+  }
+
+  .tab-button.active::before {
+    width: 20px;
+    height: 20px;
+    left: 8px;
+  }
+
+  /* 标签页内容 */
+  .tabs-content {
+    padding: 25px 15px;
+    min-height: 320px;
+  }
+
+  .tab-panel-title {
+    font-size: 1.4rem;
     margin-bottom: 20px;
-    padding-bottom: 15px;
+    padding-bottom: 12px;
   }
 
-  .description-section,
-  .achievements-section,
-  .video-section {
-    margin-bottom: 30px;
-    padding: 20px;
+  .tab-panel-title .title-icon {
+    height: 1.3em;
+    margin-left: 8px;
   }
 
-  /* 手机端背景图片优化 */
-  .description-section,
-  .achievements-section,
-  .video-section {
-    background-size: cover;
-    background-position: center;
+  .tab-panel-content {
+    font-size: 1rem;
   }
 
-  /* 手机端遮罩层透明度调整，确保文字清晰可读 */
-  .description-section::before,
-  .achievements-section::before,
-  .video-section::before {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .description-section h2,
-  .achievements-section h2,
-  .video-section h2 {
-    font-size: 1.44rem; /* 1.2 * 1.2 = 1.44，加大一号 */
+  .tab-panel-content p {
     margin-bottom: 15px;
   }
 
-  /* 手机端标题图标 */
-  .section-title .title-icon {
-    height: 1.2em;
-    margin-left: 6px;
+  .achievements-list {
+    gap: 6px;
   }
 
-  /* 手机端正文字体已在基础样式中统一设置为 1.05rem */
   .achievements-list li {
-    padding: 10px 0 10px 25px;
+    padding: 6px 0 6px 30px;
+    font-size: 1rem;
   }
 
-  /* 手机视频容器 - 优先展示全视频 */
+  .achievements-list li:before {
+    left: 8px;
+    font-size: 1.1rem;
+  }
+
+  .video-wrapper {
+    border-radius: 12px;
+    padding: 6px;
+  }
+
+  .video-wrapper::before {
+    border-radius: 12px;
+  }
+
+  /* 手机视频容器 */
   .video-wrapper {
     min-height: 200px;
     padding: 0;

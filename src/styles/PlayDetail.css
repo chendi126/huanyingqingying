@@ -1,0 +1,423 @@
+/* 剧目详情页面 */
+.play-detail-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background-attachment: fixed;
+  padding: 20px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* 顶部导航栏 */
+.play-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  margin-bottom: 30px;
+  position: relative;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  overflow: visible;
+}
+
+.play-detail-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  padding: 3px;
+  background: linear-gradient(135deg,
+    var(--color-primary) 0%,
+    var(--color-primary) 30%,
+    transparent 30%,
+    transparent 70%,
+    var(--color-secondary) 70%,
+    var(--color-secondary) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.play-detail-title-section {
+  text-align: center;
+  flex: 1;
+  z-index: 1;
+}
+
+.play-detail-title {
+  font-family: var(--font-title);
+  font-size: 2.5rem;
+  color: var(--color-dark);
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.play-detail-subtitle {
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.5);
+  letter-spacing: 3px;
+  margin-top: 5px;
+  position: relative;
+  z-index: 1;
+}
+
+.home-button {
+  background: white;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.home-button:hover {
+  background: var(--color-primary);
+  color: white;
+  transform: scale(1.1);
+}
+
+.home-icon {
+  display: block;
+}
+
+/* 角色网络图容器 */
+.character-network-container {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 30px;
+  padding: 40px;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  margin-bottom: 30px;
+  overflow: visible;
+}
+
+.character-network-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 30px;
+  padding: 3px;
+  background: linear-gradient(135deg,
+    var(--color-primary) 0%,
+    var(--color-primary) 35%,
+    transparent 35%,
+    transparent 65%,
+    var(--color-secondary) 65%,
+    var(--color-secondary) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.character-network-svg {
+  width: 100%;
+  height: 500px;
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+/* 中心剧目六边形 */
+.center-play-hex {
+  filter: drop-shadow(0 4px 12px rgba(212, 20, 90, 0.3));
+}
+
+.center-hex-bg {
+  transition: all 0.3s ease;
+}
+
+.center-hex-border {
+  filter: drop-shadow(0 0 8px rgba(212, 20, 90, 0.5));
+}
+
+.center-play-name {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 900;
+  fill: #d4145a;
+  letter-spacing: 0.3em;
+}
+
+/* 角色六边形节点 */
+.character-hex-node {
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center center;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.1));
+}
+
+.character-hex-node:active {
+  transform: scale(0.95);
+}
+
+.char-hex-bg {
+  transition: all 0.3s ease;
+}
+
+.char-hex-border {
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 4px rgba(232, 93, 159, 0.3));
+}
+
+/* 角色名称 */
+.character-name {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  fill: var(--color-dark);
+  letter-spacing: 0.3em;
+}
+
+/* 角色标签 */
+.char-role-tag {
+  transition: all 0.3s ease;
+}
+
+.char-role-text {
+  font-family: var(--font-serif);
+  font-size: 0.65rem;
+  font-weight: 600;
+  fill: white;
+}
+
+/* 剧目描述卡片 */
+.play-description-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 30px;
+  position: relative;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  overflow: visible;
+}
+
+.play-description-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  padding: 3px;
+  background: linear-gradient(135deg,
+    var(--color-primary) 0%,
+    var(--color-primary) 30%,
+    transparent 30%,
+    transparent 70%,
+    var(--color-secondary) 70%,
+    var(--color-secondary) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.play-description-card h2 {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  color: var(--color-dark);
+  margin: 0 0 15px 0;
+  font-weight: 700;
+  letter-spacing: 3px;
+  position: relative;
+  z-index: 1;
+}
+
+.play-description-card p {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--color-dark);
+  line-height: 1.8;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* 底部说明 */
+.play-detail-footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 15px;
+  position: relative;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  overflow: visible;
+}
+
+.play-detail-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 15px;
+  padding: 3px;
+  background: linear-gradient(135deg,
+    var(--color-primary) 0%,
+    var(--color-primary) 30%,
+    transparent 30%,
+    transparent 70%,
+    var(--color-secondary) 70%,
+    var(--color-secondary) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.play-detail-footer p {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--color-dark);
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* 响应式设计 - 平板 */
+@media (max-width: 768px) {
+  .play-detail-header {
+    padding: 15px 20px;
+  }
+
+  .play-detail-title {
+    font-size: 2rem;
+  }
+
+  .play-detail-subtitle {
+    font-size: 1rem;
+  }
+
+  .character-network-svg {
+    height: 450px;
+  }
+
+  .center-play-name {
+    font-size: 1.2rem;
+  }
+
+  .character-name {
+    font-size: 0.9rem;
+  }
+
+  .play-description-card {
+    padding: 25px;
+  }
+
+  .play-description-card h2 {
+    font-size: 1.6rem;
+  }
+
+  .play-description-card p {
+    font-size: 1.1rem;
+  }
+}
+
+/* 响应式设计 - 手机 */
+@media (max-width: 480px) {
+  .play-detail-page {
+    padding: 10px;
+  }
+
+  .play-detail-header {
+    padding: 15px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .play-detail-title {
+    font-size: 2rem;
+  }
+
+  .play-detail-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .back-button,
+  .home-button {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+
+  .character-network-container {
+    padding: 15px;
+  }
+
+  .character-network-svg {
+    height: 450px;
+    transform: scale(1.4);
+    transform-origin: center center;
+  }
+
+  .center-play-name {
+    font-size: 1.2rem;
+  }
+
+  .character-name {
+    font-size: 0.9rem;
+  }
+
+  .char-role-text {
+    font-size: 0.6rem;
+  }
+
+  .play-description-card {
+    padding: 25px;
+  }
+
+  .play-description-card h2 {
+    font-size: 1.6rem;
+  }
+
+  .play-description-card p {
+    font-size: 1.1rem;
+  }
+
+  .play-detail-footer p {
+    font-size: 1.05rem;
+  }
+}

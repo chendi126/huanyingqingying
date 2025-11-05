@@ -1,53 +1,129 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { characters } from '../data/characters';
-import ThemeSwitcher from '../components/ThemeSwitcher';
 import '../styles/Home.css';
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = useState('');
+
   return (
     <div className="home">
-      <header className="header">
-        <ThemeSwitcher />
-        <div className="header-content">
-          <h1 className="title">焕影清音</h1>
-          <p className="subtitle">——华县皮影的前世今生</p>
+      {/* 顶部导航栏 */}
+      <nav className="navbar">
+        <div className="navbar-left">
+          <img src="/piying1.png" alt="焕影清音 Logo" className="navbar-logo" />
+          <h1 className="navbar-title">焕影清音</h1>
         </div>
-      </header>
+        <div className="navbar-right">
+          <button className="settings-button" aria-label="设置">
+            <img src="/ic_public_settings.svg" alt="设置" className="settings-icon" />
+          </button>
+        </div>
+      </nav>
+
+      {/* 搜索框 */}
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="搜索网站内容..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button className="search-button" aria-label="搜索">
+          <svg className="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+        </button>
+      </div>
 
       <main className="main-content">
-        <section className="intro-section">
-          <h2>传统艺术瑰宝</h2>
-          <p>
-            华县皮影戏是中国传统民间艺术的重要组成部分，已有数百年的历史。
-            它以其精美的造型、生动的表演和优美的音乐，吸引了无数观众。
-            这里介绍的是华县皮影戏的杰出传承人和艺术家。
-          </p>
-        </section>
-
-        <section className="characters-section">
-          <h2>杰出传承人</h2>
-          <div className="characters-grid">
-            {characters.map((character) => (
-              <Link
-                key={character.id}
-                to={`/character/${character.id}`}
-                className="character-card-link"
-              >
-                <div className="character-card">
-                  <div className="card-image-wrapper">
-                    <img
-                      src={character.thumbnail}
-                      alt={character.name}
-                      className="card-image"
-                    />
+        {/* 4个主要内容卡片 */}
+        <section className="content-cards-section">
+          {/* 第一张卡片：咫尺之间·新闻动态 */}
+          <div className="content-card">
+            <h2 className="content-card-title">咫尺之间·新闻动态</h2>
+            <div className="content-card-body">
+              <div className="news-list">
+                <div className="news-item">
+                  <div className="news-item-content">
+                    <h3 className="news-title-cn">最新资讯</h3>
+                    <h3 className="news-title-en">LATEST NEWS</h3>
                   </div>
-                  <div className="card-content">
-                    <h3 className="card-name">{character.name}</h3>
-                    <p className="card-title">{character.title}</p>
-                  </div>
+                  <div className="news-item-line"></div>
                 </div>
+                <div className="news-item">
+                  <div className="news-item-content">
+                    <h3 className="news-title-cn">活动预告</h3>
+                    <h3 className="news-title-en">UPCOMING EVENTS</h3>
+                  </div>
+                  <div className="news-item-line"></div>
+                </div>
+                <div className="news-item">
+                  <div className="news-item-content">
+                    <h3 className="news-title-cn">文化动态</h3>
+                    <h3 className="news-title-en">CULTURAL UPDATES</h3>
+                  </div>
+                  <div className="news-item-line"></div>
+                </div>
+                <div className="news-item">
+                  <div className="news-item-content">
+                    <h3 className="news-title-cn">团队报道</h3>
+                    <h3 className="news-title-en">TEAM REPORTS</h3>
+                  </div>
+                  <div className="news-item-line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 第二张卡片：匠心独运·非遗传承人 */}
+          <div className="content-card">
+            <h2 className="content-card-title">匠心独运·非遗传承人</h2>
+            <div className="content-card-body">
+              <div className="characters-grid">
+                {characters.map((character) => (
+                  <Link
+                    key={character.id}
+                    to={`/character/${character.id}`}
+                    className="character-card-link"
+                  >
+                    <div className="character-card">
+                      <div className="card-image-wrapper">
+                        <img
+                          src={character.thumbnail}
+                          alt={character.name}
+                          className="card-image"
+                        />
+                      </div>
+                      <div className="card-content">
+                        <h3 className="card-name">{character.name}</h3>
+                        <p className="card-title">{character.title}</p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* 第三张卡片：千古流芳·经典剧目 */}
+          <div className="content-card">
+            <h2 className="content-card-title">千古流芳·经典剧目</h2>
+            <div className="content-card-body">
+              <Link to="/plays" className="plays-simple-link">
+                点击查看更多....&gt;
               </Link>
-            ))}
+            </div>
+          </div>
+
+          {/* 第四张卡片：薪火相传·陕西特色 */}
+          <div className="content-card">
+            <h2 className="content-card-title">薪火相传·陕西特色</h2>
+            <div className="content-card-body">
+              <p className="content-card-description">陕西皮影特色内容即将上线...</p>
+            </div>
           </div>
         </section>
       </main>

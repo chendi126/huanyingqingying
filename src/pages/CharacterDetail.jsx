@@ -1,11 +1,12 @@
 import { useParams, Link } from 'react-router-dom';
+import { useState } from 'react';
 import { characters } from '../data/characters';
-import ThemeSwitcher from '../components/ThemeSwitcher';
 import '../styles/CharacterDetail.css';
 
 export default function CharacterDetail() {
   const { id } = useParams();
   const character = characters.find((c) => c.id === parseInt(id));
+  const [activeTab, setActiveTab] = useState('form'); // 'form', 'spirit', 'beauty'
 
   if (!character) {
     return (
@@ -20,10 +21,14 @@ export default function CharacterDetail() {
     );
   }
 
+  // 获取代表作品（从成就中提取第一个，或使用默认值）
+  const representativeWork = character.achievements && character.achievements.length > 0
+    ? character.achievements[0]
+    : character.title;
+
   return (
     <div className="detail-container">
       <header className="detail-header">
-        <ThemeSwitcher />
         <div className="header-title-wrapper">
           <h1 className="header-title">焕影清音</h1>
           <p className="header-subtitle">——华县皮影的前世今生</p>
@@ -31,80 +36,121 @@ export default function CharacterDetail() {
       </header>
 
       <main className="detail-content">
-        <div className="detail-header-section">
-          <h1 className="detail-name">
-            <span className="name-text">{character.name}</span>
-            <img src="/jytongbao5.png" alt="" className="name-icon" />
-          </h1>
-          <p className="detail-title">{character.title}</p>
+        {/* 顶部区域：左侧图片，右侧姓名和代表作品 */}
+        <div className="character-top-section">
+          <div className="character-image-container">
+            <img
+              src={character.image}
+              alt={character.name}
+              className="character-main-image"
+            />
+          </div>
+          <div className="character-info-container">
+            <h1 className="character-name">
+              <span className="name-text">{character.name}</span>
+              <img src="/jytongbao5.png" alt="" className="name-icon" />
+            </h1>
+            <p className="character-representative-work">
+              <span className="work-label">代表作品：</span>
+              <span className="work-content">{representativeWork}</span>
+            </p>
+          </div>
         </div>
 
-        <div className="detail-main-layout">
-          <div className="description-section">
-            <div className="description-container">
-              <div className="description-left">
-                <h2 className="section-title">
+        {/* 信息卡片区域 */}
+        <div className="info-card-section">
+          {/* 标签页导航 */}
+          <div className="tabs-navigation">
+            <button
+              className={`tab-button ${activeTab === 'form' ? 'active' : ''}`}
+              onClick={() => setActiveTab('form')}
+            >
+              形·皮相
+            </button>
+            <button
+              className={`tab-button ${activeTab === 'spirit' ? 'active' : ''}`}
+              onClick={() => setActiveTab('spirit')}
+            >
+              神·骨相
+            </button>
+            <button
+              className={`tab-button ${activeTab === 'beauty' ? 'active' : ''}`}
+              onClick={() => setActiveTab('beauty')}
+            >
+              美·真如
+            </button>
+          </div>
+
+          {/* 标签页内容 */}
+          <div className="tabs-content">
+            {/* 形·皮相 - 人物介绍 */}
+            {activeTab === 'form' && (
+              <div className="tab-panel fade-in">
+                <h2 className="tab-panel-title">
                   <span className="title-text">人物介绍</span>
                   <img src="/piying1.png" alt="" className="title-icon" />
                 </h2>
-                <div className="description-text">
+                <div className="tab-panel-content">
                   {character.description.split('\n\n').map((paragraph, index) => (
                     <p key={index}>{paragraph}</p>
                   ))}
                 </div>
               </div>
-              <div className="description-right">
-                <div className="detail-hero">
-                  <img
-                    src={character.image}
-                    alt={character.name}
-                    className="detail-image"
-                  />
+            )}
+
+            {/* 神·骨相 - 主要成就 */}
+            {activeTab === 'spirit' && (
+              <div className="tab-panel fade-in">
+                <h2 className="tab-panel-title">
+                  <span className="title-text">主要成就</span>
+                  <img src="/piying2.png" alt="" className="title-icon" />
+                </h2>
+                <div className="tab-panel-content">
+                  {character.achievements && character.achievements.length > 0 ? (
+                    <ul className="achievements-list">
+                      {character.achievements.map((achievement, index) => (
+                        <li key={index}>{achievement}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>暂无成就信息</p>
+                  )}
                 </div>
               </div>
-            </div>
+            )}
+
+            {/* 美·真如 - 相关视频 */}
+            {activeTab === 'beauty' && (
+              <div className="tab-panel fade-in">
+                <h2 className="tab-panel-title">
+                  <span className="title-text">相关视频</span>
+                  <img src="/piying3.png" alt="" className="title-icon" />
+                </h2>
+                <div className="tab-panel-content">
+                  <div className="video-wrapper">
+                    {character.videoUrl.startsWith('http') ? (
+                      <iframe
+                        src={character.videoUrl}
+                        title={`${character.name}的视频`}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="video-iframe"
+                        style={{ border: 'none' }}
+                      ></iframe>
+                    ) : (
+                      <video
+                        controls
+                        className="video-player"
+                      >
+                        <source src={character.videoUrl} type="video/mp4" />
+                        您的浏览器不支持视频播放
+                      </video>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-
-          {character.achievements && character.achievements.length > 0 && (
-            <section className="achievements-section">
-              <h2 className="section-title">
-                <span className="title-text">主要成就</span>
-                <img src="/piying2.png" alt="" className="title-icon" />
-              </h2>
-              <ul className="achievements-list">
-                {character.achievements.map((achievement, index) => (
-                  <li key={index}>{achievement}</li>
-                ))}
-              </ul>
-            </section>
-          )}
-
-          <section className="video-section">
-            <h2 className="section-title">
-              <span className="title-text">相关视频</span>
-              <img src="/piying3.png" alt="" className="title-icon" />
-            </h2>
-            <div className="video-wrapper">
-              {character.videoUrl.startsWith('http') ? (
-                <iframe
-                  src={character.videoUrl}
-                  title={`${character.name}的视频`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="video-iframe"
-                  style={{ border: 'none' }}
-                ></iframe>
-              ) : (
-                <video
-                  controls
-                  className="video-player"
-                >
-                  <source src={character.videoUrl} type="video/mp4" />
-                  您的浏览器不支持视频播放
-                </video>
-              )}
-            </div>
-          </section>
         </div>
       </main>
 
