@@ -1,0 +1,70 @@
+/**
+ * 字体管理文件
+ * 管理所有自定义字体的 @font-face 声明
+ */
+
+/* ========================================
+   1. 首页正文字体 (shouye.woff)
+   用于：首页内容正文、页脚正文、搜索框、查看更多按钮
+   ======================================== */
+@font-face {
+  font-family: 'Shouye';
+  src: url('/shouye.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
+   2. 导航标题字体 (huanyingqingyin.woff)
+   用于：顶部导航栏"焕影清音"标题
+   ======================================== */
+@font-face {
+  font-family: 'MonsterWord';
+  src: url('/huanyingqingyin.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
+   3. 卡片标题字体 (HYNianHuaSongU-subset.woff)
+   用于：咫尺之间、匠心独运、千古流芳、剧目网络等标题
+   ======================================== */
+@font-face {
+  font-family: 'NianHuaSong';
+  src: url('/HYNianHuaSongU-subset.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
+   4. 剧目角色字体 (jvmu.woff)
+   用于：从剧目页面进入的角色详细页正文
+   ======================================== */
+@font-face {
+  font-family: 'Jvmu';
+  src: url('/jvmu.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
+   字体使用说明
+   ======================================== */
+
+/*
+使用方法：
+
+1. 首页正文字体 (Shouye):
+   .content-text { font-family: 'Shouye', sans-serif; }
+
+2. 导航标题字体 (MonsterWord):
+   .site-title { font-family: 'MonsterWord', serif; }
+
+3. 卡片标题字体 (NianHuaSong):
+   .card-title { font-family: 'NianHuaSong', serif; }
+*/
+

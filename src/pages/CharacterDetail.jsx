@@ -1,12 +1,35 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { characters } from '../data/characters';
+import { plays } from '../data/plays';
 import '../styles/CharacterDetail.css';
 
 export default function CharacterDetail() {
-  const { id } = useParams();
-  const character = characters.find((c) => c.id === parseInt(id));
+  const { id, charId } = useParams();
   const [activeTab, setActiveTab] = useState('form'); // 'form', 'spirit', 'beauty'
+
+  // 判断是否来自剧目页面
+  const isFromPlay = !!charId;
+
+  // 尝试从两个数据源查找角色
+  let character = null;
+
+  // 如果是从首页传承人进来的（数字ID）
+  if (id) {
+    character = characters.find((c) => c.id === parseInt(id));
+  }
+
+  // 如果是从剧目页面进来的（字符串ID）
+  if (charId && !character) {
+    // 遍历所有剧目，查找角色
+    for (const play of plays) {
+      const foundChar = play.characters.find((c) => c.id === charId);
+      if (foundChar) {
+        character = foundChar;
+        break;
+      }
+    }
+  }
 
   if (!character) {
     return (
@@ -24,10 +47,10 @@ export default function CharacterDetail() {
   // 获取代表作品（从成就中提取第一个，或使用默认值）
   const representativeWork = character.achievements && character.achievements.length > 0
     ? character.achievements[0]
-    : character.title;
+    : (character.title || character.role);
 
   return (
-    <div className="detail-container">
+    <div className={`detail-container ${isFromPlay ? 'play-character' : ''}`}>
       <header className="detail-header">
         <div className="header-title-wrapper">
           <h1 className="header-title">焕影清音</h1>

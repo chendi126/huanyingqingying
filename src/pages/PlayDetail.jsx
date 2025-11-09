@@ -16,41 +16,20 @@ function PlayDetail() {
     );
   }
 
-  // 蜂窝网格布局 - 使用轴坐标系统
-  const centerHexSize = 70; // 中心六边形（剧目）
-  const charHexSize = 50;   // 角色六边形（更紧凑）
+  // 正方形布局配置
+  const centerSquareSize = 100; // 中心正方形（剧目）
+  const charSquareSize = 70;    // 角色正方形
 
-  // 轴坐标转换为笛卡尔坐标
-  const axialToCartesian = (q, r, size) => {
-    const x = size * Math.sqrt(3) * (q + r / 2);
-    const y = size * (3 / 2) * r;
-    return { x, y };
-  };
-
-  // 生成六边形顶点
-  const getHexPoints = (size) => {
-    const h = size;
-    const w = size * Math.sqrt(3) / 2;
-    return [
-      `0,${-h}`,
-      `${w},${-h / 2}`,
-      `${w},${h / 2}`,
-      `0,${h}`,
-      `${-w},${h / 2}`,
-      `${-w},${-h / 2}`
-    ].join(' ');
-  };
-
-  // 为角色分配蜂窝网格位置（紧密排列）
+  // 为角色分配正方形位置（分散排列）
   const getCharacterLayout = () => {
     const charCount = play.characters.length;
     const layouts = {
-      1: [{ q: 1, r: 0 }],
-      2: [{ q: 1, r: 0 }, { q: -1, r: 0 }],
-      3: [{ q: 1, r: 0 }, { q: -1, r: 1 }, { q: 0, r: -1 }],
-      4: [{ q: 1, r: 0 }, { q: 0, r: 1 }, { q: -1, r: 0 }, { q: 0, r: -1 }],
-      5: [{ q: 1, r: 0 }, { q: 1, r: -1 }, { q: 0, r: 1 }, { q: -1, r: 1 }, { q: 0, r: -1 }],
-      6: [{ q: 1, r: 0 }, { q: 1, r: -1 }, { q: 0, r: 1 }, { q: -1, r: 1 }, { q: -1, r: 0 }, { q: 0, r: -1 }],
+      1: [{ x: 140, y: 0 }],
+      2: [{ x: 140, y: 0 }, { x: -140, y: 0 }],
+      3: [{ x: 140, y: 0 }, { x: -140, y: 0 }, { x: 0, y: -120 }],
+      4: [{ x: 140, y: 0 }, { x: -140, y: 0 }, { x: 0, y: -120 }, { x: 0, y: 120 }],
+      5: [{ x: 140, y: -60 }, { x: 140, y: 60 }, { x: -140, y: -60 }, { x: -140, y: 60 }, { x: 0, y: -120 }],
+      6: [{ x: 140, y: -60 }, { x: 140, y: 60 }, { x: -140, y: -60 }, { x: -140, y: 60 }, { x: 0, y: -120 }, { x: 0, y: 120 }],
     };
 
     return layouts[Math.min(charCount, 6)] || layouts[6];
@@ -81,22 +60,22 @@ function PlayDetail() {
 
       {/* 角色网络图容器 */}
       <div className="character-network-container">
-        <svg className="character-network-svg" viewBox="-300 -300 600 600" preserveAspectRatio="xMidYMid meet">
+        <svg className="character-network-svg" viewBox="-250 -180 500 360" preserveAspectRatio="xMidYMid meet">
           {/* 定义渐变 */}
           <defs>
-            {/* 中心六边形渐变 */}
-            <radialGradient id="centerPlayGradient">
-              <stop offset="0%" stopColor="#fff5f5" />
-              <stop offset="30%" stopColor="#ffe0e0" />
-              <stop offset="70%" stopColor="#ffcccc" />
-              <stop offset="100%" stopColor="#ff9999" />
-            </radialGradient>
+            {/* 红色渐变 - 用于左上角直角边框装饰 */}
+            <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#d4145a" />
+              <stop offset="50%" stopColor="#e85d9f" />
+              <stop offset="100%" stopColor="#ff6b9d" />
+            </linearGradient>
 
-            {/* 角色六边形渐变 */}
-            <radialGradient id="charGradient">
-              <stop offset="0%" stopColor="#ffffff" />
-              <stop offset="100%" stopColor="#ffe6f0" />
-            </radialGradient>
+            {/* 深红色渐变 - 用于右下角直角边框装饰 */}
+            <linearGradient id="darkRedGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#8b0000" />
+              <stop offset="50%" stopColor="#a52a2a" />
+              <stop offset="100%" stopColor="#b22222" />
+            </linearGradient>
 
             {/* 发光滤镜 */}
             <filter id="charGlow">
@@ -108,22 +87,58 @@ function PlayDetail() {
             </filter>
           </defs>
 
-          {/* 中心剧目六边形 */}
-          <g className="center-play-hex" style={{ pointerEvents: 'none' }}>
-            {/* 六边形背景 */}
-            <polygon
-              points={getHexPoints(centerHexSize)}
-              fill="url(#centerPlayGradient)"
-              className="center-hex-bg"
+          {/* 绘制连接线 - 从中心到各个角色 */}
+          <g className="connection-lines">
+            {play.characters.slice(0, characterLayout.length).map((char, index) => {
+              const layout = characterLayout[index];
+              return (
+                <line
+                  key={`line-${char.id}`}
+                  x1="0"
+                  y1="0"
+                  x2={layout.x}
+                  y2={layout.y}
+                  stroke="rgba(139, 0, 0, 0.3)"
+                  strokeWidth="2"
+                  strokeDasharray="5,5"
+                  className="connection-line"
+                />
+              );
+            })}
+          </g>
+
+          {/* 中心剧目正方形 */}
+          <g className="center-play-square" style={{ pointerEvents: 'none' }}>
+            {/* 正方形背景 - 透明模糊 */}
+            <rect
+              x={-centerSquareSize / 2}
+              y={-centerSquareSize / 2}
+              width={centerSquareSize}
+              height={centerSquareSize}
+              fill="rgba(255, 255, 255, 0.2)"
+              className="center-square-bg"
             />
 
-            {/* 六边形边框 */}
-            <polygon
-              points={getHexPoints(centerHexSize)}
+            {/* 左上角直角边框装饰 - 深红色渐变 */}
+            <polyline
+              points={`${-centerSquareSize / 2},${-centerSquareSize / 2 + centerSquareSize * 0.25} ${-centerSquareSize / 2},${-centerSquareSize / 2} ${-centerSquareSize / 2 + centerSquareSize * 0.25},${-centerSquareSize / 2}`}
               fill="none"
-              stroke="#d4145a"
-              strokeWidth="4"
-              className="center-hex-border"
+              stroke="url(#darkRedGradient)"
+              strokeWidth="3"
+              strokeLinecap="square"
+              strokeLinejoin="miter"
+              className="center-corner-border top-left"
+            />
+
+            {/* 右下角直角边框装饰 - 深红色渐变 */}
+            <polyline
+              points={`${centerSquareSize / 2},${centerSquareSize / 2 - centerSquareSize * 0.25} ${centerSquareSize / 2},${centerSquareSize / 2} ${centerSquareSize / 2 - centerSquareSize * 0.25},${centerSquareSize / 2}`}
+              fill="none"
+              stroke="url(#darkRedGradient)"
+              strokeWidth="3"
+              strokeLinecap="square"
+              strokeLinejoin="miter"
+              className="center-corner-border bottom-right"
             />
 
             {/* 剧目名称（竖排） */}
@@ -140,33 +155,50 @@ function PlayDetail() {
             </text>
           </g>
 
-          {/* 角色六边形节点 */}
-          <g className="character-hexagons">
+          {/* 角色正方形节点 */}
+          <g className="character-squares">
             {play.characters.slice(0, characterLayout.length).map((char, index) => {
               const layout = characterLayout[index];
-              const pos = axialToCartesian(layout.q, layout.r, charHexSize);
+              const halfSize = charSquareSize / 2;
+              const cornerLength = charSquareSize * 0.25;
 
               return (
                 <g
                   key={char.id}
-                  transform={`translate(${pos.x}, ${pos.y})`}
-                  className="character-hex-node"
+                  transform={`translate(${layout.x}, ${layout.y})`}
+                  className="character-square-node"
                   onClick={() => handleCharacterClick(char.id)}
                 >
-                  {/* 六边形背景 */}
-                  <polygon
-                    points={getHexPoints(charHexSize)}
-                    fill="url(#charGradient)"
-                    className="char-hex-bg"
+                  {/* 正方形背景 - 透明模糊 */}
+                  <rect
+                    x={-halfSize}
+                    y={-halfSize}
+                    width={charSquareSize}
+                    height={charSquareSize}
+                    fill="rgba(255, 255, 255, 0.2)"
+                    className="char-square-bg"
                   />
 
-                  {/* 六边形边框 */}
-                  <polygon
-                    points={getHexPoints(charHexSize)}
+                  {/* 左上角直角边框装饰 - 深红色渐变 */}
+                  <polyline
+                    points={`${-halfSize},${-halfSize + cornerLength} ${-halfSize},${-halfSize} ${-halfSize + cornerLength},${-halfSize}`}
                     fill="none"
-                    stroke="var(--color-primary)"
+                    stroke="url(#darkRedGradient)"
                     strokeWidth="2.5"
-                    className="char-hex-border"
+                    strokeLinecap="square"
+                    strokeLinejoin="miter"
+                    className="char-corner-border top-left"
+                  />
+
+                  {/* 右下角直角边框装饰 - 深红色渐变 */}
+                  <polyline
+                    points={`${halfSize},${halfSize - cornerLength} ${halfSize},${halfSize} ${halfSize - cornerLength},${halfSize}`}
+                    fill="none"
+                    stroke="url(#darkRedGradient)"
+                    strokeWidth="2.5"
+                    strokeLinecap="square"
+                    strokeLinejoin="miter"
+                    className="char-corner-border bottom-right"
                   />
 
                   {/* 角色名称（竖排） */}
@@ -183,7 +215,7 @@ function PlayDetail() {
                   </text>
 
                   {/* 角色标签 */}
-                  <g transform={`translate(0, ${charHexSize - 15})`}>
+                  <g transform={`translate(0, ${halfSize - 10})`}>
                     <rect
                       x="-20"
                       y="0"

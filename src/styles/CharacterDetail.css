@@ -28,6 +28,9 @@
   position: relative;
   /* 性能优化 */
   will-change: scroll-position;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* 毛玻璃遮罩层 - 优化性能 */
@@ -338,7 +341,7 @@
 .tab-button {
   padding: 18px 25px 18px 45px;
   font-size: 1.6rem;
-  font-family: var(--font-title);
+  font-family: 'NianHuaSong', var(--font-title);
   font-weight: 600;
   color: #666;
   background: transparent;
@@ -1030,5 +1033,38 @@
     font-size: 0.85rem;
     letter-spacing: 0.5px;
   }
+}
+
+/* ========================================
+   剧目角色页面专用字体样式
+   用于从剧目页面进入的角色详细页
+   ======================================== */
+
+/* 剧目角色页面的正文使用 Jvmu 字体 */
+.detail-container.play-character .tab-panel-content {
+  font-family: 'Jvmu', var(--font-serif);
+}
+
+.detail-container.play-character .tab-panel-content p {
+  font-family: 'Jvmu', var(--font-serif);
+}
+
+/* 剧目角色页面的成就列表也使用 Jvmu 字体 */
+.detail-container.play-character .achievements-list li {
+  font-family: 'Jvmu', var(--font-serif);
+}
+
+/* 剧目角色页面的人物名称使用 Jvmu 字体 */
+.detail-container.play-character .character-name {
+  font-family: 'Jvmu', 'KaiTi', 'STKaiti', 'SimSun', serif;
+}
+
+/* 剧目角色页面的代表作品使用 Jvmu 字体 */
+.detail-container.play-character .character-representative-work {
+  font-family: 'Jvmu', var(--font-serif);
+}
+
+.detail-container.play-character .work-content {
+  font-family: 'Jvmu', var(--font-serif);
 }
 

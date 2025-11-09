@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import CharacterDetail from './pages/CharacterDetail';
 import Plays from './pages/Plays';
@@ -10,6 +11,7 @@ function App() {
   return (
     <ThemeProvider>
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/character/:id" element={<CharacterDetail />} />

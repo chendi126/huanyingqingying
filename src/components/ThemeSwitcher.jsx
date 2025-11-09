@@ -16,10 +16,10 @@ export default function ThemeSwitcher() {
       <button
         className="theme-switcher-button"
         onClick={() => setIsOpen(!isOpen)}
-        aria-label="切换主题"
+        aria-label="设置"
         title={`当前主题：${themeName}`}
       >
-        <img src="/ic_public_themes.svg" alt="主题" className="theme-icon" />
+        <img src="/ic_public_settings.svg" alt="设置" className="theme-icon" />
       </button>
 
       {isOpen && (

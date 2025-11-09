@@ -1,9 +1,31 @@
 ﻿/* 剧目页面 */
 .plays-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background-image: url('/JvmuBackground.jpg');
+  background-size: cover;
+  background-position: center;
   background-attachment: fixed;
+  background-repeat: no-repeat;
   padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+/* 整个页面的模糊遮罩层 */
+.plays-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 0;
+  pointer-events: none;
 }
 
 .plays-header {
@@ -12,36 +34,17 @@
   gap: 20px;
   padding: 20px 30px;
   margin-bottom: 30px;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(20px);
+  background: transparent;
   border-radius: 20px;
-  border: 3px solid transparent;
-  background-clip: padding-box;
+  border: none;
   position: relative;
   overflow: visible;
+  z-index: 1;
 }
 
+/* 删除边框装饰 */
 .plays-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 20px;
-  padding: 3px;
-  background: linear-gradient(135deg,
-    var(--color-primary) 0%,
-    var(--color-primary) 30%,
-    transparent 30%,
-    transparent 70%,
-    var(--color-secondary) 70%,
-    var(--color-secondary) 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  z-index: -1;
+  display: none;
 }
 
 .header-content {
@@ -50,7 +53,7 @@
 }
 
 .plays-title {
-  font-family: var(--font-title);
+  font-family: 'NianHuaSong', var(--font-title);
   font-size: 2.5rem;
   color: var(--color-dark);
   margin: 0;
@@ -88,42 +91,24 @@
 
 .network-container {
   position: relative;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(20px);
+  background: transparent;
   border-radius: 30px;
   padding: 40px;
   margin-bottom: 30px;
-  border: 3px solid transparent;
-  background-clip: padding-box;
+  border: none;
   overflow: visible;
+  z-index: 1;
 }
 
+/* 删除边框装饰 */
 .network-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 30px;
-  padding: 3px;
-  background: linear-gradient(135deg,
-    var(--color-primary) 0%,
-    var(--color-primary) 35%,
-    transparent 35%,
-    transparent 65%,
-    var(--color-secondary) 65%,
-    var(--color-secondary) 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  z-index: -1;
+  display: none;
 }
 
 .network-svg {
   width: 100%;
-  height: 700px;
+  height: auto;
+  aspect-ratio: 640 / 500;
   display: block;
   touch-action: none;
   user-select: none;
@@ -135,27 +120,66 @@
   z-index: 1;
 }
 
-/* 蜂窝节点样式 */
-.hex-node {
+/* 连接线样式 */
+.connection-line {
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+/* 正方形节点样式 */
+.square-node {
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.hex-node:hover {
+.square-node:hover {
   filter: brightness(1.05) url(#glow);
 }
 
-.hex-node:active {
-  transform: scale(0.98);
+.square-node:active {
+  filter: brightness(0.95);
 }
 
-/* 六边形背景 */
-.hex-background {
+/* 点击渐隐放大动画 */
+.square-node.clicked {
+  animation: fadeOutZoom 0.6s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+@keyframes fadeOutZoom {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+  }
+}
+
+/* 正方形背景 - 透明 + 模糊效果 */
+.square-background {
+  transition: all 0.3s ease;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+/* L形装饰线条 - 对角装饰 */
+.corner-decoration {
+  pointer-events: none;
+}
+
+.corner-line {
   transition: all 0.3s ease;
 }
 
-/* 六边形边框 */
-.hex-border {
+/* 悬停时 L 形线条发光 */
+.square-node:hover .corner-line {
+  filter: drop-shadow(0 0 8px rgba(212, 20, 90, 0.9));
+  stroke-width: 4;
+}
+
+/* 正方形边框 */
+.square-border {
   fill: none;
   transition: all 0.3s ease;
 }
@@ -193,19 +217,19 @@
 }
 
 /* 悬停效果增强 */
-.hex-node:hover .hex-border {
+.square-node:hover .square-border {
   stroke-width: 5;
   filter: drop-shadow(0 0 12px currentColor);
 }
 
-.hex-node:hover .hex-inner-border {
+.square-node:hover .square-inner-border {
   stroke: rgba(255, 255, 255, 0.8);
   stroke-width: 2;
 }
 
 /* 文字样式 */
-.hex-name {
-  font-family: var(--font-serif);
+.square-name {
+  font-family: 'Jvmu', var(--font-serif);
   font-weight: 700;
   fill: var(--color-dark);
   letter-spacing: 0.3em;
@@ -226,7 +250,7 @@
 }
 
 /* 悬停时文字发光 */
-.hex-node:hover .hex-name {
+.square-node:hover .square-name {
   filter: drop-shadow(0 0 6px rgba(212, 20, 90, 0.6));
 }
 
@@ -236,7 +260,7 @@
   transition: all 0.3s ease;
 }
 
-.hex-node:hover .char-count {
+.square-node:hover .char-count {
   font-size: 12px;
   font-weight: 900;
 }
@@ -246,7 +270,7 @@
   transition: all 0.3s ease;
 }
 
-.hex-node:hover .category-icon {
+.square-node:hover .category-icon {
   opacity: 1;
   transform: scale(1.2);
 }
@@ -282,36 +306,17 @@
 .plays-footer {
   text-align: center;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(20px);
+  background: transparent;
   border-radius: 15px;
-  border: 3px solid transparent;
-  background-clip: padding-box;
+  border: none;
   position: relative;
   overflow: visible;
+  z-index: 1;
 }
 
+/* 删除边框装饰 */
 .plays-footer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 15px;
-  padding: 3px;
-  background: linear-gradient(135deg,
-    var(--color-primary) 0%,
-    var(--color-primary) 30%,
-    transparent 30%,
-    transparent 70%,
-    var(--color-secondary) 70%,
-    var(--color-secondary) 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  z-index: -1;
+  display: none;
 }
 
 .footer-content {
@@ -320,7 +325,7 @@
 }
 
 .footer-text {
-  font-family: var(--font-serif);
+  font-family: 'Jvmu', var(--font-serif);
   font-size: 1.1rem;
   color: var(--color-dark);
   margin: 0 0 5px 0;
@@ -339,8 +344,8 @@
     font-size: 2rem;
   }
 
-  .network-svg {
-    height: 700px;
+  .network-container {
+    padding: 20px;
   }
 
   .center-name {
@@ -370,6 +375,12 @@
 }
 
 @media (max-width: 480px) {
+  .plays-page {
+    padding: 10px;
+    height: auto;
+    min-height: 100vh;
+  }
+
   .plays-header {
     flex-direction: column;
     padding: 15px;
@@ -380,14 +391,8 @@
   }
 
   .network-container {
-    padding: 10px;
+    padding: 15px;
     margin-bottom: 20px;
-  }
-
-  .network-svg {
-    height: 700px;
-    transform: scale(1.5);
-    transform-origin: center center;
   }
 
   .center-name {

@@ -1,32 +1,30 @@
 /* 主题切换器 */
 .theme-switcher {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  position: relative;
   z-index: 100;
 }
 
 .theme-switcher-button {
-  display: absolute;
+  display: flex;
   align-items: center;
   justify-content: center;
   padding: 8px;
   background: transparent;
   border: none;
   cursor: pointer;
+  border-radius: 50%;
   transition: all 0.3s ease;
 }
 
 .theme-switcher-button:hover {
-  transform: scale(1.1);
-  opacity: 0.8;
+  background: rgba(232, 93, 159, 0.1);
+  transform: rotate(30deg);
 }
 
 .theme-icon {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  width: 28px;
+  height: 28px;
+  color: var(--color-primary);
 }
 
 /* 主题下拉菜单 - 横向布局 */
@@ -116,60 +114,41 @@
 
 /* 响应式设计 - 平板 */
 @media (max-width: 768px) {
-  .theme-switcher {
-    top: 15px;
-    right: 15px;
-  }
-
-  .theme-switcher-button {
-    padding: 8px;
-  }
-
   .theme-icon {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
   }
 
   .theme-dropdown {
-    padding: 8px 12px;
-    gap: 8px;
+    padding: 6px 10px;
+    gap: 6px;
   }
 
   .theme-color-preview {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
   }
 }
 
-/* 响应式设计 - 手机 - 统一样式 */
+/* 响应式设计 - 手机 */
 @media (max-width: 480px) {
-  .theme-switcher {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-  }
-
-  .theme-switcher-button {
-    padding: 8px;  /* 与PC端一致 */
-    background: transparent;  /* 与PC端一致 */
-    border-radius: 0;  /* 与PC端一致 */
-    box-shadow: none;  /* 与PC端一致 */
-  }
-
   .theme-icon {
-    width: 32px;  /* 与PC端一致 */
-    height: 32px;  /* 与PC端一致 */
+    width: 22px;
+    height: 22px;
   }
 
   .theme-dropdown {
-    padding: 8px 12px;  /* 与PC端一致 */
-    gap: 8px;  /* 与PC端一致 */
+    padding: 6px 8px;
+    gap: 6px;
   }
 
   .theme-color-preview {
-    width: 28px;  /* 与PC端一致 */
-    height: 28px;  /* 与PC端一致 */
+    width: 22px;
+    height: 22px;
+  }
+
+  .theme-check {
+    font-size: 1rem;
   }
 }
 

@@ -1,23 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { plays } from '../data/plays';
 import '../styles/Plays.css';
 
 function Plays() {
   const navigate = useNavigate();
+  const [clickedPlayId, setClickedPlayId] = useState(null);
 
-  // 蜂窝布局配置
+  // 正方形布局配置
   const centerPlayId = 'play1'; // 西游记作为中心剧目
-  const largeHexSize = 90; // 中心大六边形的半径
-  const smallHexSize = 60; // 周围小六边形的半径
-
-  // 六边形拼接布局计算 - 紧密相邻
-  // 使用轴坐标系统 (axial coordinates) 来定位六边形
-  const getHexPosition = (q, r, hexSize) => {
-    const x = hexSize * Math.sqrt(3) * (q + r / 2);
-    const y = hexSize * (3 / 2) * r;
-    return { x, y };
-  };
+  const largeSquareSize = 140; // 中心大正方形的边长
+  const smallSquareSize = 90; // 周围小正方形的边长
 
   // 剧目分类（用于不同的视觉样式）
   const playCategories = {
@@ -33,37 +26,40 @@ function Plays() {
     'play10': 'drama',    // 窦娥冤 - 戏剧
   };
 
-  // 定义蜂窝拼图布局 - 紧密拼接
-  // 使用标准六边形网格坐标，确保边缘完全贴合
-  const hexLayout = {
-    'play1': { q: 0, r: 0, size: largeHexSize },     // 中心：西游记（大）
-    'play2': { q: 2, r: -1, size: smallHexSize },    // 右上：三国演义
-    'play3': { q: -2, r: 1, size: smallHexSize },    // 左下：白蛇传
-    'play4': { q: 1, r: 1, size: smallHexSize },     // 右下：封神演义
-    'play5': { q: -1, r: -1, size: smallHexSize },   // 左上：红楼梦
-    'play6': { q: 0, r: 2, size: smallHexSize },     // 正下：水浒传
-    'play7': { q: 2, r: 0, size: smallHexSize },     // 右：牡丹亭
-    'play8': { q: -2, r: 0, size: smallHexSize },    // 左：长生殿
-    'play9': { q: 0, r: -2, size: smallHexSize },    // 正上：桃花扇
-    'play10': { q: 1, r: -2, size: smallHexSize },   // 右上角：窦娥冤
+  // 定义正方形分散布局 - 随机分散但有序
+  const squareLayout = {
+    'play1': { x: 0, y: 0, size: largeSquareSize },        // 中心：西游记（大）
+    'play2': { x: 220, y: -120, size: smallSquareSize },   // 右上：三国演义
+    'play3': { x: -200, y: 100, size: smallSquareSize },   // 左下：白蛇传
+    'play4': { x: 180, y: 130, size: smallSquareSize },    // 右下：封神演义
+    'play5': { x: -220, y: -100, size: smallSquareSize },  // 左上：红楼梦
+    'play6': { x: 50, y: 180, size: smallSquareSize },     // 下：水浒传
+    'play7': { x: 240, y: 20, size: smallSquareSize },     // 右：牡丹亭
+    'play8': { x: -240, y: 0, size: smallSquareSize },     // 左：长生殿
+    'play9': { x: -80, y: -180, size: smallSquareSize },   // 上：桃花扇
+    'play10': { x: 100, y: -200, size: smallSquareSize },  // 右上角：窦娥冤
   };
 
   // 获取剧目的位置、大小和类别
   const getPlayLayout = (playId) => {
-    const layout = hexLayout[playId];
-    if (!layout) return { x: 0, y: 0, size: smallHexSize, category: 'drama' };
+    const layout = squareLayout[playId];
+    if (!layout) return { x: 0, y: 0, size: smallSquareSize, category: 'drama' };
 
-    const pos = getHexPosition(layout.q, layout.r, layout.size);
     return {
-      ...pos,
+      x: layout.x,
+      y: layout.y,
       size: layout.size,
       category: playCategories[playId] || 'drama'
     };
   };
 
-  // 处理剧目点击
+  // 处理剧目点击 - 添加渐隐放大动画
   const handlePlayClick = (playId) => {
-    navigate(`/plays/${playId}`);
+    setClickedPlayId(playId);
+    // 等待动画完成后跳转
+    setTimeout(() => {
+      navigate(`/plays/${playId}`);
+    }, 600); // 600ms 动画时间
   };
 
   return (
@@ -79,9 +75,9 @@ function Plays() {
         </div>
       </header>
 
-      {/* 蜂窝网络图容器 */}
+      {/* 正方形网络图容器 */}
       <div className="network-container">
-        <svg className="network-svg" viewBox="-500 -400 1000 800" preserveAspectRatio="xMidYMid meet">
+        <svg className="network-svg" viewBox="-350 -280 700 560" preserveAspectRatio="xMidYMid meet">
           {/* 定义渐变、图案和滤镜 */}
           <defs>
             {/* 神话类渐变 - 金色系 */}
@@ -119,6 +115,25 @@ function Plays() {
               <stop offset="70%" stopColor="#ffcccc" />
               <stop offset="100%" stopColor="#ff9999" />
             </radialGradient>
+
+            {/* 画布背景图案 - huabu.jpg */}
+            <pattern id="huabuPattern" x="0" y="0" width="1" height="1" patternContentUnits="objectBoundingBox">
+              <image href="/huabu.jpg" x="0" y="0" width="1" height="1" preserveAspectRatio="xMidYMid slice" />
+            </pattern>
+
+            {/* 红色渐变 - 用于左上角 L 形装饰线条 */}
+            <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#d4145a" />
+              <stop offset="50%" stopColor="#e85d9f" />
+              <stop offset="100%" stopColor="#ff6b9d" />
+            </linearGradient>
+
+            {/* 深红色渐变 - 用于右下角 L 形装饰线条 */}
+            <linearGradient id="darkRedGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#8b0000" />
+              <stop offset="50%" stopColor="#a52a2a" />
+              <stop offset="100%" stopColor="#b22222" />
+            </linearGradient>
 
             {/* 传统纹理图案 - 云纹 */}
             <pattern id="cloudPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
@@ -161,123 +176,88 @@ function Plays() {
             </filter>
           </defs>
 
-          {/* 绘制蜂窝拼图节点 */}
-          <g className="honeycomb-nodes">
+          {/* 绘制连接线 - 从中心到各个剧目 */}
+          <g className="connection-lines">
+            {plays.map((play) => {
+              if (play.id === centerPlayId) return null; // 跳过中心剧目
+              const layout = getPlayLayout(play.id);
+              return (
+                <line
+                  key={`line-${play.id}`}
+                  x1="0"
+                  y1="0"
+                  x2={layout.x}
+                  y2={layout.y}
+                  stroke="rgba(139, 0, 0, 0.3)"
+                  strokeWidth="2"
+                  strokeDasharray="5,5"
+                  className="connection-line"
+                />
+              );
+            })}
+          </g>
+
+          {/* 绘制正方形节点 */}
+          <g className="square-nodes">
             {plays.map((play) => {
               const layout = getPlayLayout(play.id);
               const isCenterPlay = play.id === centerPlayId;
+              const isClicked = clickedPlayId === play.id;
               const category = layout.category;
 
-              // 根据六边形大小计算顶点
+              // 正方形大小
               const size = layout.size;
-              const h = size; // 六边形的半径
-              const w = h * Math.sqrt(3) / 2; // 六边形的宽度的一半
+              const halfSize = size / 2;
 
-              // 六边形的6个顶点（尖角朝上）
-              const hexPoints = [
-                `0,${-h}`,
-                `${w},${-h/2}`,
-                `${w},${h/2}`,
-                `0,${h}`,
-                `${-w},${h/2}`,
-                `${-w},${-h/2}`
-              ].join(' ');
-
-              // 内部小六边形（装饰用）
-              const innerSize = size * 0.85;
-              const innerH = innerSize;
-              const innerW = innerH * Math.sqrt(3) / 2;
-              const innerHexPoints = [
-                `0,${-innerH}`,
-                `${innerW},${-innerH/2}`,
-                `${innerW},${innerH/2}`,
-                `0,${innerH}`,
-                `${-innerW},${innerH/2}`,
-                `${-innerW},${-innerH/2}`
-              ].join(' ');
-
-              // 根据类别选择渐变
-              const gradientId = isCenterPlay ? 'centerGradient' : `${category}Gradient`;
+              // L形装饰边框的长度（正方形边长的25%）
+              const cornerLength = size * 0.25;
 
               return (
                 <g
                   key={play.id}
                   transform={`translate(${layout.x}, ${layout.y})`}
-                  className={`hex-node ${isCenterPlay ? 'center-node' : 'small-node'} category-${category}`}
+                  className={`square-node ${isCenterPlay ? 'center-node' : 'small-node'} ${isClicked ? 'clicked' : ''} category-${category}`}
                   onClick={() => handlePlayClick(play.id)}
-                  filter="url(#shadow)"
                 >
-                  {/* 外层阴影六边形 */}
-                  <polygon
-                    points={hexPoints}
-                    className="hex-shadow"
-                    fill="rgba(0,0,0,0.1)"
-                    transform="translate(2, 4)"
+                  {/* 主背景正方形 - 透明 + 模糊效果 */}
+                  <rect
+                    x={-halfSize}
+                    y={-halfSize}
+                    width={size}
+                    height={size}
+                    fill="rgba(255, 255, 255, 0.2)"
+                    className="square-background"
                   />
 
-                  {/* 主背景六边形 - 渐变填充 */}
-                  <polygon
-                    points={hexPoints}
-                    fill={`url(#${gradientId})`}
-                    className="hex-background"
-                  />
+                  {/* 左上角直角边框装饰 - 深红色渐变 */}
+                  <g className="corner-decoration">
+                    <polyline
+                      points={`${-halfSize},${-halfSize + cornerLength} ${-halfSize},${-halfSize} ${-halfSize + cornerLength},${-halfSize}`}
+                      fill="none"
+                      stroke="url(#darkRedGradient)"
+                      strokeWidth="3"
+                      strokeLinecap="square"
+                      strokeLinejoin="miter"
+                      className="corner-border top-left"
+                    />
+                  </g>
 
-                  {/* 纹理图案层 */}
-                  <polygon
-                    points={hexPoints}
-                    fill="url(#cloudPattern)"
-                    opacity="0.4"
-                  />
-
-                  {/* 内部装饰六边形 */}
-                  <polygon
-                    points={innerHexPoints}
-                    className="hex-inner-border"
-                    fill="none"
-                    stroke="rgba(255,255,255,0.5)"
-                    strokeWidth="1"
-                    strokeDasharray={isCenterPlay ? "5,3" : "3,2"}
-                  />
-
-                  {/* 主边框 */}
-                  <polygon
-                    points={hexPoints}
-                    className={`hex-border ${isCenterPlay ? 'center-border' : 'small-border'}`}
-                    fill="none"
-                  />
-
-                  {/* 中心节点特殊装饰 - 双线边框 */}
-                  {isCenterPlay && (
-                    <>
-                      <polygon
-                        points={hexPoints}
-                        fill="none"
-                        stroke="#d4145a"
-                        strokeWidth="2"
-                        opacity="0.6"
-                        transform="scale(0.95)"
-                      />
-                      {/* 角落装饰点 */}
-                      <circle cx="0" cy={-h} r="4" fill="#d4145a" opacity="0.8" />
-                      <circle cx={w} cy={-h/2} r="4" fill="#d4145a" opacity="0.8" />
-                      <circle cx={w} cy={h/2} r="4" fill="#d4145a" opacity="0.8" />
-                      <circle cx="0" cy={h} r="4" fill="#d4145a" opacity="0.8" />
-                      <circle cx={-w} cy={h/2} r="4" fill="#d4145a" opacity="0.8" />
-                      <circle cx={-w} cy={-h/2} r="4" fill="#d4145a" opacity="0.8" />
-                    </>
-                  )}
-
-                  {/* 几何装饰线 - 对角线 */}
-                  {!isCenterPlay && (
-                    <g opacity="0.2">
-                      <line x1={-w*0.5} y1={-h*0.3} x2={w*0.5} y2={h*0.3} stroke="white" strokeWidth="1" />
-                      <line x1={-w*0.5} y1={h*0.3} x2={w*0.5} y2={-h*0.3} stroke="white" strokeWidth="1" />
-                    </g>
-                  )}
+                  {/* 右下角直角边框装饰 - 深红色渐变 */}
+                  <g className="corner-decoration">
+                    <polyline
+                      points={`${halfSize},${halfSize - cornerLength} ${halfSize},${halfSize} ${halfSize - cornerLength},${halfSize}`}
+                      fill="none"
+                      stroke="url(#darkRedGradient)"
+                      strokeWidth="3"
+                      strokeLinecap="square"
+                      strokeLinejoin="miter"
+                      className="corner-border bottom-right"
+                    />
+                  </g>
 
                   {/* 剧目名称 - 竖排 */}
                   <text
-                    className={`hex-name ${isCenterPlay ? 'center-name' : 'small-name'}`}
+                    className={`square-name ${isCenterPlay ? 'center-name' : 'small-name'}`}
                     textAnchor="middle"
                     dominantBaseline="middle"
                   >
@@ -291,40 +271,6 @@ function Plays() {
                       </tspan>
                     ))}
                   </text>
-
-                  {/* 角色数量标签 */}
-                  {!isCenterPlay && (
-                    <g transform={`translate(${w * 0.6}, ${h * 0.6})`}>
-                      <circle r="12" fill="rgba(255,255,255,0.9)" />
-                      <text
-                        className="char-count"
-                        textAnchor="middle"
-                        dominantBaseline="middle"
-                        fill="#333"
-                        fontSize="10"
-                        fontWeight="bold"
-                      >
-                        {play.characters.length}
-                      </text>
-                    </g>
-                  )}
-
-                  {/* 类别图标装饰 */}
-                  {!isCenterPlay && (
-                    <text
-                      className="category-icon"
-                      x="0"
-                      y={h * 0.7}
-                      textAnchor="middle"
-                      fontSize="16"
-                      opacity="0.6"
-                    >
-                      {category === 'mythology' && '⚡'}
-                      {category === 'history' && '⚔️'}
-                      {category === 'romance' && '💕'}
-                      {category === 'drama' && '🎭'}
-                    </text>
-                  )}
                 </g>
               );
             })}
