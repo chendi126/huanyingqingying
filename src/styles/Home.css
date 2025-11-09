@@ -126,7 +126,7 @@
   border: 2px solid var(--color-border);
   border-radius: 50px;
   background: rgba(255, 255, 255, 0.95);
-  font-family: 'Jvmu', var(--font-serif);
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;  /* 使用默认楷体 */
   transition: all 0.3s ease;
   outline: none;
 }
@@ -138,7 +138,7 @@
 
 .search-input::placeholder {
   color: #999;
-  font-family: 'Jvmu', var(--font-serif);
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;  /* 使用默认楷体 */
 }
 
 .search-button {
@@ -190,7 +190,7 @@
 }
 
 .quick-search-title {
-  font-family: 'Jvmu', var(--font-serif);
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;  /* 使用默认楷体 */
   font-size: 1rem;
   color: var(--color-dark);
   margin-bottom: 15px;
@@ -208,7 +208,7 @@
   background: rgba(232, 93, 159, 0.1);
   border: 1px solid var(--color-border);
   border-radius: 20px;
-  font-family: 'Jvmu', var(--font-serif);
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;  /* 使用默认楷体 */
   font-size: 0.95rem;
   color: var(--color-primary);
   cursor: pointer;
@@ -228,7 +228,7 @@
 }
 
 .search-results-title {
-  font-family: 'Jvmu', var(--font-serif);
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;  /* 使用默认楷体 */
   font-size: 1rem;
   color: var(--color-dark);
   margin-bottom: 15px;
@@ -272,7 +272,7 @@
 }
 
 .search-result-name {
-  font-family: 'Jvmu', var(--font-serif);
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;  /* 使用默认楷体 */
   font-size: 1rem;
   color: var(--color-dark);
   font-weight: 600;
@@ -280,7 +280,7 @@
 }
 
 .search-result-subtitle {
-  font-family: 'Jvmu', var(--font-serif);
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;  /* 使用默认楷体 */
   font-size: 0.85rem;
   color: #666;
 }
@@ -299,7 +299,7 @@
 }
 
 .no-results-text {
-  font-family: 'Jvmu', var(--font-serif);
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;  /* 使用默认楷体 */
   font-size: 1.1rem;
   color: var(--color-dark);
   margin-bottom: 8px;
@@ -307,7 +307,7 @@
 }
 
 .no-results-hint {
-  font-family: 'Jvmu', var(--font-serif);
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;  /* 使用默认楷体 */
   font-size: 0.9rem;
   color: #999;
 }
@@ -385,13 +385,13 @@
 }
 
 .content-card-body {
-  font-family: var(--font-serif);
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;  /* 使用默认楷体 */
   position: relative;
   z-index: 1;
 }
 
 .content-card-description {
-  font-family: 'Shouye', var(--font-serif);
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;  /* 使用默认楷体 */
   font-size: 1.2rem;
   color: var(--color-dark);
   text-align: center;
@@ -440,7 +440,7 @@
 
 /* 中文标题 */
 .news-title-cn {
-  font-family: 'Shouye', var(--font-serif);
+  font-family: 'ShouyeNeirong', var(--font-serif);  /* 使用首页内容字体 */
   font-size: 2rem;
   color: var(--color-dark);
   margin: 0;
@@ -578,7 +578,7 @@
 }
 
 .plays-entrance-title {
-  font-family: var(--font-serif);
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;  /* 使用默认楷体 */
   font-size: 2rem;
   color: var(--color-primary);
   margin: 0 0 10px 0;
@@ -589,7 +589,7 @@
 }
 
 .plays-entrance-subtitle {
-  font-family: 'Arial', sans-serif;
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;  /* 使用默认楷体 */
   font-size: 1.2rem;
   color: rgba(0, 0, 0, 0.4);
   margin: 0 0 20px 0;
@@ -600,7 +600,7 @@
 }
 
 .plays-entrance-desc {
-  font-family: var(--font-serif);
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;  /* 使用默认楷体 */
   font-size: 1.1rem;
   color: var(--color-dark);
   line-height: 1.8;
@@ -672,7 +672,7 @@
 
 /* 人物姓名 */
 .character-name-cn {
-  font-family: var(--font-serif);
+  font-family: 'Chuanchengren', var(--font-serif);  /* 使用传承人字体 */
   font-size: 2rem;
   color: var(--color-dark);
   margin: 0;
@@ -683,7 +683,7 @@
 
 /* 人物描述 */
 .character-title-desc {
-  font-family: var(--font-serif);
+  font-family: 'Chuanchengren', var(--font-serif);  /* 使用传承人字体 */
   font-size: 1.1rem;
   color: rgba(0, 0, 0, 0.5);
   margin: 0;
@@ -715,13 +715,13 @@
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  font-family: 'Shouye', var(--font-serif);
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;  /* 使用默认楷体 */
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .view-more-text {
-  font-family: 'Shouye', var(--font-serif);
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;  /* 使用默认楷体 */
   font-size: 1.2rem;
   color: var(--color-primary);
   letter-spacing: 2px;
@@ -787,7 +787,7 @@
 }
 
 .footer-title {
-  font-family: var(--font-serif);
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;  /* 使用默认楷体 */
   font-size: 1.38rem; /* 1.2 * 1.15 = 1.38 */
   color: var(--color-primary);
   margin: 0 0 15px 0;
@@ -796,7 +796,7 @@
 
 .footer-description,
 .footer-link {
-  font-family: 'Shouye', var(--font-serif);
+  font-family: 'Yejiao', var(--font-serif);  /* 使用页脚正文字体 */
   font-size: 1.1rem; /* 0.95 * 1.15 ≈ 1.1 */
   color: var(--color-dark);
   margin: 0 0 10px 0;
@@ -826,7 +826,7 @@
 }
 
 .footer-text {
-  font-family: 'Shouye', var(--font-serif);
+  font-family: 'Yejiao', var(--font-serif);  /* 使用页脚正文字体 */
   font-size: 1.04rem; /* 0.9 * 1.15 ≈ 1.04 */
   color: var(--color-dark);
   margin: 0 0 8px 0;

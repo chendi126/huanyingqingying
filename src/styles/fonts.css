@@ -52,6 +52,42 @@
 }
 
 /* ========================================
+   5. 首页内容字体 (shouyeneirong.woff)
+   用于：首页"最新资讯、活动预告、文化动态、团队报道、进入剧目厅、访问我们的店"
+   ======================================== */
+@font-face {
+  font-family: 'ShouyeNeirong';
+  src: url('/shouyeneirong.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
+   6. 页脚正文字体 (yejiao.woff)
+   用于：页脚正文内容
+   ======================================== */
+@font-face {
+  font-family: 'Yejiao';
+  src: url('/yejiao.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
+   7. 传承人字体 (chaunchengren.woff)
+   用于：匠心独运·非遗传承人中的内容
+   ======================================== */
+@font-face {
+  font-family: 'Chuanchengren';
+  src: url('/chaunchengren.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
    字体使用说明
    ======================================== */
 
@@ -66,5 +102,17 @@
 
 3. 卡片标题字体 (NianHuaSong):
    .card-title { font-family: 'NianHuaSong', serif; }
+
+4. 剧目角色字体 (Jvmu):
+   .play-content { font-family: 'Jvmu', sans-serif; }
+
+5. 首页内容字体 (ShouyeNeirong):
+   .news-title { font-family: 'ShouyeNeirong', sans-serif; }
+
+6. 页脚正文字体 (Yejiao):
+   .footer-text { font-family: 'Yejiao', sans-serif; }
+
+7. 传承人字体 (Chuanchengren):
+   .inheritor-content { font-family: 'Chuanchengren', sans-serif; }
 */
 
