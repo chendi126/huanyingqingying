@@ -244,20 +244,20 @@ export default function Home() {
             <h2 className="content-card-title">咫尺之间·新闻动态</h2>
             <div className="content-card-body">
               <div className="news-list">
-                <div className="news-item">
+                <Link to="/news" className="news-item">
                   <div className="news-item-content">
                     <h3 className="news-title-cn">最新资讯</h3>
                     <h3 className="news-title-en">LATEST NEWS</h3>
                   </div>
                   <div className="news-item-line"></div>
-                </div>
-                <div className="news-item">
+                </Link>
+                <Link to="/activities" className="news-item">
                   <div className="news-item-content">
                     <h3 className="news-title-cn">活动预告</h3>
                     <h3 className="news-title-en">UPCOMING EVENTS</h3>
                   </div>
                   <div className="news-item-line"></div>
-                </div>
+                </Link>
                 <div className="news-item">
                   <div className="news-item-content">
                     <h3 className="news-title-cn">文化动态</h3>

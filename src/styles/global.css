@@ -91,11 +91,6 @@ a {
   transition: all 0.3s ease;
 }
 
-a:hover {
-  color: var(--color-accent);
-  text-decoration: underline;
-}
-
 /* 装饰线条 */
 .divider {
   height: 2px;

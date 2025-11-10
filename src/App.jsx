@@ -7,6 +7,8 @@ import Home from './pages/Home';
 import CharacterDetail from './pages/CharacterDetail';
 import Plays from './pages/Plays';
 import PlayDetail from './pages/PlayDetail';
+import News from './pages/News';
+import Activities from './pages/Activities';
 import './App.css';
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/activities" element={<Activities />} />
           <Route path="/character/:id" element={<CharacterDetail />} />
           <Route path="/plays" element={<Plays />} />
           <Route path="/plays/:playId" element={<PlayDetail />} />
