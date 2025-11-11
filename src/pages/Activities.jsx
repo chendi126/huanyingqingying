@@ -24,7 +24,7 @@ function Activities() {
 
         {/* 页面标题 */}
         <header className="activities-header">
-          <h1 className="activities-title">活动预告</h1>
+          <h1 className="activities-title">文化动态</h1>
           <p className="activities-subtitle">UPCOMING EVENTS</p>
         </header>
 

@@ -1,0 +1,275 @@
+/* 最新资讯页面 - 与活动预告页面样式一致 */
+
+.latest-news-page {
+  min-height: 100vh;
+  background-image: url('/guanyvBackground.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+  padding: 30px 20px;
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;
+}
+
+/* 背景模糊遮罩层 */
+.latest-news-page::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(245, 241, 232, 0.75);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 资讯容器 - 与活动页面卡片样式一致 */
+.latest-news-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 3px solid transparent;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+/* L形对角边框 - 与首页卡片一致 */
+.latest-news-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  padding: 3px;
+  background: linear-gradient(135deg,
+    var(--color-primary) 0%,
+    transparent 30%,
+    transparent 70%,
+    var(--color-primary) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* 返回首页按钮 */
+.latest-news-page .back-button {
+  display: inline-block;
+  padding: 10px 20px;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-bottom: 30px;
+  background: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 8px;
+  border: none;
+  white-space: nowrap;
+}
+
+.latest-news-page .back-button:hover {
+  color: var(--color-dark);
+  background: rgba(255, 255, 255, 0);
+  transform: translateX(-5px);
+}
+
+/* 页面标题 */
+.latest-news-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.latest-news-title {
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 10px 0;
+}
+
+.latest-news-subtitle {
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;
+  font-size: 1.2rem;
+  color: rgba(0, 0, 0, 0.4);
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+/* 资讯列表 */
+.latest-news-list {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* 资讯项 */
+.latest-news-item {
+  padding: 30px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.latest-news-item:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateX(10px);
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* 资讯项头部 */
+.latest-news-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+/* 资讯标题 */
+.latest-news-item-title {
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;
+  font-size: 1.5rem;
+  color: var(--color-dark);
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.latest-news-item:hover .latest-news-item-title {
+  color: var(--color-primary);
+}
+
+/* 资讯描述 */
+.latest-news-item-description {
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;
+  font-size: 1.05rem;
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 1.8;
+  margin: 0 0 15px 0;
+  text-align: justify;
+}
+
+/* 查看详情链接 */
+.latest-news-item-link {
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;
+  font-size: 1rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.latest-news-item:hover .latest-news-item-link {
+  transform: translateX(5px);
+}
+
+/* 分隔线 */
+.latest-news-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.08);
+  margin: 0;
+}
+
+/* 空状态 */
+.latest-news-empty {
+  text-align: center;
+  padding: 80px 20px;
+  font-family: 'KaiTi', 'STKaiti', 'SimSun', serif;
+  font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+/* 响应式设计 - 平板端 */
+@media (max-width: 768px) {
+  .latest-news-page {
+    padding: 25px 15px;
+  }
+
+  .latest-news-container {
+    padding: 30px 25px;
+  }
+
+  .latest-news-title {
+    font-size: 2rem;
+  }
+
+  .latest-news-subtitle {
+    font-size: 1rem;
+  }
+
+  .latest-news-item {
+    padding: 25px 0;
+  }
+
+  .latest-news-item-title {
+    font-size: 1.3rem;
+  }
+
+  .latest-news-item-description {
+    font-size: 1rem;
+  }
+}
+
+/* 响应式设计 - 手机端 */
+@media (max-width: 480px) {
+  .latest-news-page {
+    padding: 20px 10px;
+  }
+
+  .latest-news-container {
+    padding: 25px 20px;
+  }
+
+  .latest-news-page .back-button {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+
+  .latest-news-title {
+    font-size: 1.8rem;
+  }
+
+  .latest-news-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .latest-news-item {
+    padding: 20px 0;
+  }
+
+  .latest-news-item-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .latest-news-item-title {
+    font-size: 1.2rem;
+  }
+
+  .latest-news-item-description {
+    font-size: 0.95rem;
+  }
+
+  .latest-news-item:hover {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+

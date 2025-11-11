@@ -9,6 +9,8 @@ import Plays from './pages/Plays';
 import PlayDetail from './pages/PlayDetail';
 import News from './pages/News';
 import Activities from './pages/Activities';
+import LatestNews from './pages/LatestNews';
+import UpcomingEvents from './pages/UpcomingEvents';
 import './App.css';
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/news" element={<News />} />
           <Route path="/activities" element={<Activities />} />
+          <Route path="/latest-news" element={<LatestNews />} />
+          <Route path="/upcoming-events" element={<UpcomingEvents />} />
           <Route path="/character/:id" element={<CharacterDetail />} />
           <Route path="/plays" element={<Plays />} />
           <Route path="/plays/:playId" element={<PlayDetail />} />
