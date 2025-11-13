@@ -1,16 +1,155 @@
-# React + Vite
+# 焕影清音 - 华县皮影艺术网站
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+一个专业的、响应式的华县皮影艺术介绍网站，展示华县皮影的杰出传承人、经典剧目和文化动态。
 
-Currently, two official plugins are available:
+## 🎭 项目简介
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**焕影清音** 致力于传承和弘扬华县皮影艺术，记录传承人的故事，让传统文化焕发新的生命力。
 
-## React Compiler
+## ✨ 核心特性
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🎨 **传统美学**：融合中国传统文化元素和皮影艺术特色
+- 📱 **响应式布局**：完美适配手机、平板和桌面设备
+- 🎬 **多媒体展示**：视频、图片等多种形式展现皮影艺术
+- 🔍 **智能搜索**：快速查找传承人和剧目信息
+- 🌓 **主题切换**：支持日间/夜间模式
 
-## Expanding the ESLint configuration
+## 🚀 快速开始
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 环境要求
+
+- **Node.js**: >= 20.0.0
+- **npm**: >= 9.0.0 (或使用 yarn/pnpm)
+
+### 安装步骤
+
+1. **克隆项目**
+```bash
+git clone https://gitee.com/chenzheng720/huanyingqingyin.git
+# 或
+git clone https://github.com/chendi126/huanyingqingying.git
+
+cd huanyingqingyin
+```
+
+2. **安装依赖**
+```bash
+npm install
+```
+
+3. **启动开发服务器**
+```bash
+npm run dev
+```
+
+4. **打开浏览器**
+访问 `http://localhost:5173/`
+
+## 📦 可用命令
+
+```bash
+# 开发模式
+npm run dev
+
+# 构建生产版本
+npm run build
+
+# 预览生产构建
+npm run preview
+
+# 运行测试
+npm run test
+
+# 代码检查
+npm run lint
+```
+
+## 🏗️ 项目结构
+
+```
+huanyingqingyin/
+├── public/              # 静态资源（图片、视频、字体等）
+├── src/
+│   ├── components/      # React 组件
+│   ├── pages/          # 页面组件
+│   │   ├── Home.jsx           # 首页
+│   │   ├── LatestNews.jsx     # 最新资讯
+│   │   ├── UpcomingEvents.jsx # 活动预告
+│   │   ├── News.jsx           # 团队报道
+│   │   ├── Activities.jsx     # 文化动态
+│   │   ├── Plays.jsx          # 剧目列表
+│   │   └── CharacterDetail.jsx # 传承人详情
+│   ├── data/           # 数据文件
+│   ├── styles/         # 样式文件
+│   ├── context/        # React Context
+│   └── App.jsx         # 主应用组件
+├── package.json        # 项目配置
+└── vite.config.js      # Vite 配置
+```
+
+## 🛠️ 技术栈
+
+- **前端框架**: React 19
+- **构建工具**: Vite 7
+- **路由**: React Router DOM 7
+- **样式**: CSS (原生)
+- **测试**: Vitest + Testing Library
+
+## 📝 常见问题
+
+### 1. 安装依赖失败
+
+如果 `npm install` 失败，请尝试：
+```bash
+# 清除缓存
+npm cache clean --force
+
+# 删除 node_modules 和 package-lock.json
+rm -rf node_modules package-lock.json
+
+# 重新安装
+npm install
+```
+
+### 2. Node 版本不匹配
+
+确保使用 Node.js 20 或更高版本：
+```bash
+node -v  # 应该显示 v20.x.x 或更高
+```
+
+如果版本过低，请升级 Node.js：
+- 访问 [Node.js 官网](https://nodejs.org/) 下载最新版本
+- 或使用 nvm 管理 Node 版本
+
+### 3. 端口被占用
+
+如果 5173 端口被占用，Vite 会自动使用下一个可用端口（如 5174）。
+
+## 🌐 部署
+
+### GitHub Pages 部署
+```bash
+npm run build:github
+```
+
+### 服务器部署
+```bash
+npm run build
+# 将 dist 目录部署到服务器
+```
+
+## 👥 贡献者
+
+- **制作人**: 陈笛
+- **艺术视觉**: 李商文昱
+
+## 📄 许可证
+
+© 2025 焕影清音 - 传承华县皮影艺术
+
+## 🔗 相关链接
+
+- [中国非物质文化遗产网](https://www.ihchina.cn/art/detail/id/27982.html)
+- [陕西省非物质文化遗产网](https://www.sxfycc.com/home/Index/library_detail.html?id=160)
+- [西安财经大学商学院](https://sxy.xaufe.edu.cn/)
